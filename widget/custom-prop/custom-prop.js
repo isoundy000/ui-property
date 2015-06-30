@@ -1,5 +1,5 @@
-Editor.registerWidget( 'editor-prop', {
-    is: 'editor-prop',
+Editor.registerWidget( 'editor-custom-prop', {
+    is: 'editor-custom-prop',
 
     behaviors: [EditorUI.focusable],
 
@@ -14,28 +14,16 @@ Editor.registerWidget( 'editor-prop', {
     },
 
     properties: {
-        value: {
-            value: null,
-            notify: true,
-        },
-
         name: {
             type: String,
             value: '',
-        },
-
-        attrs: {
-            type: Object,
-            value: function () { return {}; },
         },
     },
 
     ready: function () {
         this._initFocusable(this);
 
-        if ( this.attrs.displayName ) {
-            this.name = this.attrs.displayName;
-        } else if ( this.name ) {
+        if ( this.name ) {
             this.name = EditorUI.toHumanText(this.name);
         }
     },
@@ -64,8 +52,14 @@ Editor.registerWidget( 'editor-prop', {
         event.preventDefault();
         event.stopPropagation();
 
-        var el = EditorUI.getFirstFocusableChild( this.$.field );
-        el.focus();
+        var children = Polymer.dom(this).children;
+        for ( var i = 0; i < children.length; ++i ) {
+            var el = EditorUI.getFirstFocusableChild(children[i]);
+            if ( el ) {
+                el.focus();
+                break;
+            }
+        }
     },
 
     _onFieldMouseDown: function ( event ) {
@@ -78,13 +72,19 @@ Editor.registerWidget( 'editor-prop', {
             event.preventDefault();
             event.stopPropagation();
 
-            var el = EditorUI.getFirstFocusableChild( this.$.field );
-            el.focus();
+            var children = Polymer.dom(this).children;
+            for ( var i = 0; i < children.length; ++i ) {
+                var el = EditorUI.getFirstFocusableChild(children[i]);
+                if ( el ) {
+                    el.focus();
+                    break;
+                }
+            }
         }
     },
 
     _onDisabledChanged: function ( event ) {
-        var children = Polymer.dom(this.$.field).children;
+        var children = Polymer.dom(this).children;
         for ( var i = 0; i < children.length; ++i ) {
             var childEL = children[i];
             if ( childEL.disabled !== undefined ) {

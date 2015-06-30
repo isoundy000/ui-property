@@ -15,7 +15,8 @@
   },
   "widgets": {
     "editor-field": "widget/field/field.html",
-    "editor-prop": "widget/prop/prop.html"
+    "editor-prop": "widget/prop/prop.html",
+    "editor-custom-prop": "widget/custom-prop/custom-prop.html"
   },
   "panels": {
     "panel": {
