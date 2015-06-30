@@ -6,8 +6,9 @@
 
     font-size: 12px;
     box-sizing: border-box;
-    margin-bottom: 5px;
     min-height: 22px;
+
+    margin-bottom: 5px;
 }
 
 .name {
