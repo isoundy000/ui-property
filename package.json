@@ -1,0 +1,34 @@
+{
+  "name": "ui-property",
+  "version": "0.0.1",
+  "description": "UI Property",
+  "author": "Firebox Technology",
+  "hosts": {
+    "editor-framework": "^0.3.10",
+    "engine-framework": "^0.0.1"
+  },
+  "main": "main.js",
+  "menus": {
+    "Developer/UI-Property Preview": {
+      "message": "ui-property:open"
+    }
+  },
+  "widgets": {
+    "editor-field": "widget/field/field.html",
+    "editor-prop": "widget/prop/prop.html"
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/panel.html",
+      "type": "dockable",
+      "title": "UI Property Preview",
+      "width": 800,
+      "height": 600,
+      "messages": [
+      ]
+    }
+  },
+  "tests": [
+      "test/prop.html"
+  ]
+}

@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    font-size: 12px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    min-height: 22px;
+}
+
+.name {
+    margin-right: 10px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ccc;
+}
+
+.name.anonymous {
+    color: #888;
+}
+
+:host[focused] .name {
+    color: #00a6ff;
+}
