@@ -1,4 +1,5 @@
 <link rel="import" href="packages://ui-kit/widget/index.html">
+<link rel="import" href="packages://fire-ui-kit/widget/index.html">
 <link rel="import" href="packages://ui-property/widget/index.html">
 
 <dom-module id="ui-property-preview">
@@ -20,7 +21,7 @@
             border-bottom: 1px solid #666;
         }
 
-        .values span {
+        .values > span {
             display: block;
             margin-left: 10px;
             margin-bottom: 5px;
@@ -40,6 +41,7 @@
         <editor-prop attrs="{{integer.attrs}}" value="{{integer.value}}"></editor-prop>
         <editor-prop attrs="{{integerMinMax.attrs}}" value="{{integerMinMax.value}}"></editor-prop>
         <editor-prop attrs="{{enum.attrs}}" value="{{enum.value}}"></editor-prop>
+        <editor-prop attrs="{{vec2.attrs}}" value="{{vec2.value}}"></editor-prop>
 
         <h3>Values:</h3>
         <div class="values">
@@ -52,6 +54,9 @@
             <span>{{integer.value}}</span>
             <span>{{integerMinMax.value}}</span>
             <span>{{enum.value}}</span>
+            <span>
+                <span>{{vec2.value.x}}</span>, <span>{{vec2.value.y}}</span>
+            </span>
         </div>
     </template>
 </dom-module>
@@ -159,11 +164,22 @@ Editor.registerPanel( 'ui-property.panel', {
                 };
             },
         },
+
+        vec2: {
+            value: function () {
+                return {
+                    value: new Fire.Vec2(10,20),
+                    attrs: {
+                        displayName: 'Fire.Vec2',
+                        type: 'Fire.Vec2',
+                    },
+                };
+            },
+        },
     },
 
     ready: function () {
     },
-
 });
 
 </script>

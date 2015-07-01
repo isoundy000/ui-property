@@ -67,8 +67,11 @@
                 el.add( item.value, item.text );
             });
 
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            // we must wait until menu ready
+            fieldEL.async( function () {
+                el.value = value;
+                EditorUI.bind( fieldEL, 'value', el, 'value' );
+            });
 
             return el;
         },
@@ -84,9 +87,10 @@
         'fire.vec2': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-vec2'];
             var el = new ctor();
+
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
-            // TODO
+
             return el;
         },
 
@@ -116,6 +120,10 @@
             // TODO
             return el;
         },
+
+        // TODO:
+        // 'fire.texture': function ( fieldEL, value, attrs ) {
+        // },
     };
 
     for ( var t in type2widget ) {
