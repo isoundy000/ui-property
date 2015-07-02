@@ -5,8 +5,15 @@
             var ctor = Editor.widgets['editor-label'];
             var el = new ctor();
             el.classList.add('mini');
-            el.classList.add('red');
             Polymer.dom(el).innerHTML = 'null';
+            return el;
+        },
+
+        'error': function ( text ) {
+            var ctor = Editor.widgets['editor-label'];
+            var el = new ctor();
+            el.classList.add('red');
+            Polymer.dom(el).innerHTML = 'Error: ' + text;
             return el;
         },
 

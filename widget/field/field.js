@@ -25,12 +25,12 @@ Editor.registerWidget( 'editor-field', {
     },
 
     _rebuild: function () {
-        if ( this.value === undefined ) {
+        if ( this.value === undefined || this.attrs === undefined ) {
             return;
         }
 
         var thisDOM = Polymer.dom(this);
-        var type;
+        var type, propEL;
 
         if ( thisDOM.firstChild ) {
             thisDOM.removeChild( thisDOM.firstChild );
@@ -42,18 +42,45 @@ Editor.registerWidget( 'editor-field', {
         else {
             if ( this.attrs.type ) {
                 type = this.attrs.type.toLowerCase();
-            } else {
+            }
+            else if ( this.value.__type__ ) {
+                type = this.value.__type__.toLowerCase();
+            }
+            else {
                 type = typeof this.value;
+            }
+
+            // check if type error
+            if ( this.attrs.type &&
+                 this.value.__type__ &&
+                 this.attrs.type !== this.value.__type__ )
+            {
+                Editor.error( 'Failed to create field %s. Message: type not the same', type );
+                propEL = new Editor.properties.error('value and attr has different type');
             }
         }
 
-        var propCreator = Editor.properties[type];
-        if ( !propCreator ) {
-            Editor.error( 'Failed to create field %s.', type );
-            return;
+        // try to get propCreator
+        if ( !propEL ) {
+            propCreator = Editor.properties[type];
+            if ( !propCreator ) {
+                Editor.error( 'Failed to create field %s.', type );
+                propEL = new Editor.properties.error('Type not found: ' + type);
+            }
         }
 
-        var propEL = propCreator( this, this.value, this.attrs );
+        // try to create propEL
+        if ( !propEL ) {
+            try {
+                propEL = propCreator( this, this.value, this.attrs );
+            }
+            catch ( error ) {
+                Editor.error( 'Failed to create field %s. Message: type not the same', type );
+                propEL = new Editor.properties.error( 'Element create failed for type: ' + type );
+            }
+        }
+
+        //
         thisDOM.appendChild(propEL);
     },
 
