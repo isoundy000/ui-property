@@ -1,5 +1,15 @@
 (function () {
     var type2widget = {
+        'null': function ( fieldEL, value, attrs ) {
+            // TODO: null creator
+            var ctor = Editor.widgets['editor-label'];
+            var el = new ctor();
+            el.classList.add('mini');
+            el.classList.add('red');
+            Polymer.dom(el).innerHTML = 'null';
+            return el;
+        },
+
         'boolean': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-checkbox'];
             var el = new ctor();

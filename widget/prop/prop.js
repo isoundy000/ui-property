@@ -27,17 +27,26 @@ Editor.registerWidget( 'editor-prop', {
         attrs: {
             type: Object,
             value: function () { return {}; },
+            observer: '_attrsChanged',
         },
     },
 
     ready: function () {
         this._initFocusable(this);
 
-        if ( this.attrs.displayName ) {
+        this._initName();
+    },
+
+    _initName: function () {
+        if ( this.attrs && this.attrs.displayName ) {
             this.name = this.attrs.displayName;
         } else if ( this.name ) {
             this.name = EditorUI.toHumanText(this.name);
         }
+    },
+
+    _attrsChanged: function () {
+        this._initName();
     },
 
     _nameText: function () {
@@ -65,7 +74,8 @@ Editor.registerWidget( 'editor-prop', {
         event.stopPropagation();
 
         var el = EditorUI.getFirstFocusableChild( this.$.field );
-        el.focus();
+        if ( el )
+            el.focus();
     },
 
     _onFieldMouseDown: function ( event ) {
@@ -79,7 +89,8 @@ Editor.registerWidget( 'editor-prop', {
             event.stopPropagation();
 
             var el = EditorUI.getFirstFocusableChild( this.$.field );
-            el.focus();
+            if ( el )
+                el.focus();
         }
     },
 

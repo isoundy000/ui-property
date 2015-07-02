@@ -5,22 +5,46 @@ Editor.registerWidget( 'editor-field', {
         value: {
             value: null,
             notify: true,
+            observer: '_valueChanged',
         },
 
         attrs: {
             type: Object,
             value: function () { return {}; },
+            observer: '_attrsChanged',
         },
     },
 
     ready: function () {
-        var thisDOM = Polymer.dom(this);
+        this._rebuild();
+    },
 
+    factoryImpl: function ( value, attrs ) {
+        this.value = value;
+        this.attrs = attrs;
+    },
+
+    _rebuild: function () {
+        if ( this.value === undefined ) {
+            return;
+        }
+
+        var thisDOM = Polymer.dom(this);
         var type;
-        if ( this.attrs.type ) {
-            type = this.attrs.type.toLowerCase();
-        } else {
-            type = typeof this.value;
+
+        if ( thisDOM.firstChild ) {
+            thisDOM.removeChild( thisDOM.firstChild );
+        }
+
+        if ( this.value === null ) {
+            type = 'null';
+        }
+        else {
+            if ( this.attrs.type ) {
+                type = this.attrs.type.toLowerCase();
+            } else {
+                type = typeof this.value;
+            }
         }
 
         var propCreator = Editor.properties[type];
@@ -33,9 +57,12 @@ Editor.registerWidget( 'editor-field', {
         thisDOM.appendChild(propEL);
     },
 
-    factoryImpl: function ( value, attrs ) {
-        this.value = value;
-        this.attrs = attrs;
+    _valueChanged: function () {
+        this._rebuild();
+    },
+
+    _attrsChanged: function () {
+        this._rebuild();
     },
 
 });
