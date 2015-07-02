@@ -25,10 +25,6 @@ Editor.registerWidget( 'editor-field', {
     },
 
     _rebuild: function () {
-        if ( this.value === undefined || this.attrs === undefined ) {
-            return;
-        }
-
         var thisDOM = Polymer.dom(this);
         var type, propEL;
 
@@ -36,11 +32,11 @@ Editor.registerWidget( 'editor-field', {
             thisDOM.removeChild( thisDOM.firstChild );
         }
 
-        if ( this.value === null ) {
-            type = 'null';
+        if ( this.value === null || this.value === undefined ) {
+            type = 'null-or-undefined';
         }
         else {
-            if ( this.attrs.type ) {
+            if ( this.attrs && this.attrs.type ) {
                 type = this.attrs.type.toLowerCase();
             }
             else if ( this.value.__type__ ) {
@@ -51,7 +47,8 @@ Editor.registerWidget( 'editor-field', {
             }
 
             // check if type error
-            if ( this.attrs.type &&
+            if ( this.attrs &&
+                 this.attrs.type &&
                  this.value.__type__ &&
                  this.attrs.type !== this.value.__type__ )
             {

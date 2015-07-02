@@ -1,11 +1,14 @@
 (function () {
     var type2widget = {
-        'null': function ( fieldEL, value, attrs ) {
+        'null-or-undefined': function ( fieldEL, value, attrs ) {
             // TODO: null creator
             var ctor = Editor.widgets['editor-label'];
             var el = new ctor();
             el.classList.add('mini');
-            Polymer.dom(el).innerHTML = 'null';
+            if ( value === null )
+                Polymer.dom(el).innerHTML = 'null';
+            else
+                Polymer.dom(el).innerHTML = 'undefined';
             return el;
         },
 
