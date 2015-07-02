@@ -14,7 +14,13 @@
             var el = new ctor();
             el.classList.add('red');
             Polymer.dom(el).innerHTML = 'Error: ' + text;
-            return el;
+
+            var div = document.createElement('div');
+            div.classList.add('layout');
+            div.classList.add('horizontal');
+            Polymer.dom(div).appendChild(el);
+
+            return div;
         },
 
         'boolean': function ( fieldEL, value, attrs ) {

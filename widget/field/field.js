@@ -84,11 +84,19 @@ Editor.registerWidget( 'editor-field', {
         thisDOM.appendChild(propEL);
     },
 
-    _valueChanged: function () {
-        this._rebuild();
+    _valueChanged: function ( newValue, oldValue ) {
+        if ( typeof oldValue !== typeof newValue ) {
+            this._rebuild();
+            return;
+        }
+
+        if ( oldValue.__type__ !== newValue.__type__ ) {
+            this._rebuild();
+            return;
+        }
     },
 
-    _attrsChanged: function () {
+    _attrsChanged: function ( newValue, oldValue ) {
         this._rebuild();
     },
 
