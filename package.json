@@ -9,7 +9,7 @@
   },
   "main": "main.js",
   "menus": {
-    "Developer/UI-Property Preview": {
+    "Developer/UI Preview/ui-property": {
       "message": "ui-property:open"
     }
   },
