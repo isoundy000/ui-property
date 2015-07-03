@@ -147,9 +147,14 @@
             return el;
         },
 
-        // TODO:
-        // 'fire.texture': function ( fieldEL, value, attrs ) {
-        // },
+        'fire.texture': function ( fieldEL, value, attrs ) {
+            // TODO
+            var ctor = Editor.widgets['editor-input'];
+            var el = new ctor();
+            el.value = value;
+            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            return el;
+        },
     };
 
     for ( var t in type2widget ) {

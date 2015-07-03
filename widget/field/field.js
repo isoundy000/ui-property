@@ -72,7 +72,7 @@ Editor.registerWidget( 'editor-field', {
                 propEL = propCreator( this, this.value, this.attrs );
             }
             catch ( error ) {
-                Editor.error( 'Failed to create field %s. Message: type not the same', type );
+                Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );
                 propEL = new Editor.properties.error( 'Element create failed for type: ' + type );
             }
         }
