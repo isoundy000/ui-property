@@ -42,6 +42,7 @@
         <editor-prop attrs="{{integerMinMax.attrs}}" value="{{integerMinMax.value}}"></editor-prop>
         <editor-prop attrs="{{enum.attrs}}" value="{{enum.value}}"></editor-prop>
         <editor-prop attrs="{{vec2.attrs}}" value="{{vec2.value}}"></editor-prop>
+        <editor-prop attrs="{{color.attrs}}" value="{{color.value}}"></editor-prop>
 
         <h3>Values:</h3>
         <div class="values">
@@ -56,6 +57,12 @@
             <span>{{enum.value}}</span>
             <span>
                 <span>{{vec2.value.x}}</span>, <span>{{vec2.value.y}}</span>
+            </span>
+            <span>
+                <span>{{color.value.r}}</span>,
+                <span>{{color.value.g}}</span>,
+                <span>{{color.value.b}}</span>,
+                <span>{{color.value.a}}</span>
             </span>
         </div>
     </template>
@@ -172,6 +179,18 @@ Editor.registerPanel( 'ui-property.panel', {
                     attrs: {
                         displayName: 'Fire.Vec2',
                         type: 'Fire.Vec2',
+                    },
+                };
+            },
+        },
+
+        color: {
+            value: function () {
+                return {
+                    value: new Fire.Color( 1, 1, 1, 0.5 ),
+                    attrs: {
+                        displayName: 'Fire.Color',
+                        type: 'Fire.Color',
                     },
                 };
             },

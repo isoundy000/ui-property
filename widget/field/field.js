@@ -32,11 +32,14 @@ Editor.registerWidget( 'editor-field', {
             thisDOM.removeChild( thisDOM.firstChild );
         }
 
+        if ( this.attrs === undefined )
+            return;
+
         if ( this.value === null || this.value === undefined ) {
             type = 'null-or-undefined';
         }
         else {
-            if ( this.attrs && this.attrs.type ) {
+            if ( this.attrs.type ) {
                 type = this.attrs.type.toLowerCase();
             }
             else if ( this.value.__type__ ) {
@@ -47,8 +50,7 @@ Editor.registerWidget( 'editor-field', {
             }
 
             // check if type error
-            if ( this.attrs &&
-                 this.attrs.type &&
+            if ( this.attrs.type &&
                  this.value.__type__ &&
                  this.attrs.type !== this.value.__type__ )
             {
