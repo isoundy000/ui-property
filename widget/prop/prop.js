@@ -14,12 +14,12 @@ Editor.registerWidget( 'editor-prop', {
     },
 
     properties: {
-        value: {
-            value: null,
-            notify: true,
+        name: {
+            type: String,
+            value: '',
         },
 
-        name: {
+        typename: {
             type: String,
             value: '',
         },
@@ -28,6 +28,11 @@ Editor.registerWidget( 'editor-prop', {
             type: Object,
             value: function () { return {}; },
             observer: '_attrsChanged',
+        },
+
+        value: {
+            value: null,
+            notify: true,
         },
     },
 
