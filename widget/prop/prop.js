@@ -89,6 +89,7 @@ Editor.registerWidget( 'editor-prop', {
     },
 
     _onKeyDown: function (event) {
+        // enter
         if (event.keyCode === 13) {
             event.preventDefault();
             event.stopPropagation();
