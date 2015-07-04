@@ -22,15 +22,11 @@ Editor.registerWidget( 'editor-custom-prop', {
 
     ready: function () {
         this._initFocusable(this);
-
-        if ( this.name ) {
-            this.name = EditorUI.toHumanText(this.name);
-        }
     },
 
     _nameText: function () {
         if ( this.name )
-            return this.name;
+            return EditorUI.toHumanText(name);
         return '(Anonymous)';
     },
 
@@ -68,6 +64,7 @@ Editor.registerWidget( 'editor-custom-prop', {
     },
 
     _onKeyDown: function (event) {
+        // enter
         if (event.keyCode === 13) {
             event.preventDefault();
             event.stopPropagation();
