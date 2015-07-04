@@ -19,15 +19,9 @@ Editor.registerWidget( 'editor-prop', {
             value: '',
         },
 
-        typename: {
-            type: String,
-            value: '',
-        },
-
         attrs: {
             type: Object,
             value: function () { return {}; },
-            observer: '_attrsChanged',
         },
 
         value: {
@@ -38,31 +32,27 @@ Editor.registerWidget( 'editor-prop', {
 
     ready: function () {
         this._initFocusable(this);
-
-        this._initName();
     },
 
-    _initName: function () {
-        if ( this.attrs && this.attrs.displayName ) {
-            this.name = this.attrs.displayName;
-        } else if ( this.name ) {
-            this.name = EditorUI.toHumanText(this.name);
+    _nameText: function ( name, attrs ) {
+        if ( attrs && attrs.displayName ) {
+            return attrs.displayName;
         }
-    },
+        else if ( name ) {
+            return EditorUI.toHumanText(name);
+        }
 
-    _attrsChanged: function () {
-        this._initName();
-    },
-
-    _nameText: function () {
-        if ( this.name )
-            return this.name;
         return '(Anonymous)';
     },
 
-    _nameClass: function () {
-        if ( this.name )
+    _nameClass: function ( name, attrs ) {
+        if ( attrs && attrs.displayName ) {
             return 'name flex-1';
+        }
+        else if ( name ) {
+            return 'name flex-1';
+        }
+
         return 'name anonymous flex-1';
     },
 
