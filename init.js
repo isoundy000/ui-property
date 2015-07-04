@@ -123,9 +123,10 @@
         'fire.color': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-color'];
             var el = new ctor();
+
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
-            // TODO
+
             return el;
         },
 
