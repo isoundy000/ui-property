@@ -24,14 +24,14 @@ Editor.registerWidget( 'editor-custom-prop', {
         this._initFocusable(this);
     },
 
-    _nameText: function () {
-        if ( this.name )
+    _nameText: function ( name ) {
+        if ( name )
             return EditorUI.toHumanText(name);
         return '(Anonymous)';
     },
 
-    _nameClass: function () {
-        if ( this.name )
+    _nameClass: function ( name ) {
+        if ( name )
             return 'name flex-1';
         return 'name anonymous flex-1';
     },
