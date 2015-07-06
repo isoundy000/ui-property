@@ -19,6 +19,12 @@ Editor.registerWidget( 'editor-field', {
             notify: true,
             observer: '_valueChanged',
         },
+
+        editing: {
+            value: null,
+            notify: true,
+            reflectToAttribute: true,
+        },
     },
 
     ready: function () {
@@ -31,6 +37,9 @@ Editor.registerWidget( 'editor-field', {
     },
 
     _rebuild: function () {
+        if ( this.editing )
+            return;
+
         var thisDOM = Polymer.dom(this);
         var type, propEL;
 

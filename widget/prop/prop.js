@@ -58,10 +58,12 @@ Editor.registerWidget( 'editor-prop', {
 
     _onFocusIn: function ( event ) {
         this._setFocused(true);
+        this.$.field.editing = true;
     },
 
     _onFocusOut: function ( event ) {
         this._setFocused(false);
+        this.$.field.editing = false;
     },
 
     _onMouseDown: function ( event ) {
