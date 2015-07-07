@@ -11,11 +11,11 @@
 }
 
 .name {
+    margin-right: 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     color: #ccc;
-    margin-right: 10px;
 }
 
 .name.anonymous {
