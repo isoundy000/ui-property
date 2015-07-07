@@ -4,9 +4,12 @@
     <link rel="import" type="css" href="prop.css">
 
     <template>
-        <div class$="{{_nameClass(name,attrs)}}"
-            on-mousedown="_onMouseDown"
-            >{{_nameText(name,attrs)}}</div>
+        <div class="flex-1 group">
+            <div class$="{{_nameClass(name,attrs)}}"
+                on-mousedown="_onMouseDown"
+                >{{_nameText(name,attrs)}}</div>
+            <editor-label class="mini blue readonly">RO</editor-label>
+        </div>
         <editor-field id="field" class="flex-2"
             value="{{value}}"
             type="[[type]]"

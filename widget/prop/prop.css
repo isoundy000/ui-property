@@ -11,8 +11,6 @@
 }
 
 .name {
-    margin-right: 10px;
-
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -33,4 +31,32 @@
 
 :host[disabled] .name {
     color: #666;
+}
+
+.readonly {
+    display: none;
+    margin-right: 4px;
+    min-width: 30px;
+}
+
+.group {
+    display: flex;
+}
+
+:host[readonly] .readonly{
+    display: inline-flex;
+    flex: 1;
+}
+
+:host[readonly] .name {
+    color: #888888;
+}
+
+.readonly ::content .text.editor-label{
+    font-size: 9px;
+    font-style: italic;
+}
+
+.readonly ::content .bg.editor-label{
+     border-radius: 1px;
 }
