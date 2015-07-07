@@ -15,6 +15,7 @@
     overflow: hidden;
     white-space: nowrap;
     color: #ccc;
+    margin-right: 10px;
 }
 
 .name.anonymous {
