@@ -35,10 +35,8 @@
 }
 
 .label {
-    background: #2376e4;
     display: none;
-    border-color: #e8e8e8;
-    margin-right: 4px;
+    margin-right: 10px;
     min-width: 30px;
     font-size: 9px;
     font-weight: bold;
@@ -47,6 +45,10 @@
     padding: .1em .5em;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    border-color: #e8e8e8;
+    background: #2376e4;
+
 }
 
 .group {
@@ -58,5 +60,6 @@
 }
 
 :host[readonly] .name {
+    margin-right: 0px;
     color: #888888;
 }
