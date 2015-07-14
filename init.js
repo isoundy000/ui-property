@@ -149,11 +149,12 @@
         },
 
         'fire.texture': function ( fieldEL, value, attrs ) {
-            // TODO
-            var ctor = Editor.widgets['editor-input'];
+            var ctor = Editor.widgets['fire-asset'];
             var el = new ctor();
+
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
+
             return el;
         },
     };
