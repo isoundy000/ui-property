@@ -190,6 +190,17 @@
 
             return el;
         },
+
+        'fire.ttffont': function ( fieldEL, value, attrs ) {
+            var ctor = Editor.widgets['fire-asset'];
+            var el = new ctor();
+
+            el.type = 'ttf-font';
+            el.value = value;
+            EditorUI.bind( fieldEL, 'value', el, 'value' );
+
+            return el;
+        },
     };
 
     for ( var t in type2widget ) {
