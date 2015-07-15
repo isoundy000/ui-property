@@ -1,14 +1,22 @@
 (function () {
     var type2widget = {
         'null-or-undefined': function ( fieldEL, value, attrs ) {
-            // TODO: null creator
             var ctor = Editor.widgets['editor-label'];
             var el = new ctor();
+
             el.classList.add('mini');
             if ( value === null )
                 Polymer.dom(el).innerHTML = 'null';
             else
                 Polymer.dom(el).innerHTML = 'undefined';
+
+            // TODO
+            // // add a create button
+            // ctor = Editor.widgets['editor-button'];
+            // var btnEL = new ctor();
+            // Polymer.dom(btnEL).innerHTML = 'Create';
+            // Polymer.dom(fieldEL).appendChild(btnEL);
+
             return el;
         },
 
@@ -29,18 +37,22 @@
         'boolean': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-checkbox'];
             var el = new ctor();
+
             el.checked = value;
             EditorUI.bind( fieldEL, 'value', el, 'checked' );
+
             return el;
         },
 
         'integer': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
-            el.inputValue = value;
+
             el.min = attrs.min;
             el.max = attrs.max;
+            el.inputValue = value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
+
             return el;
         },
 
@@ -49,18 +61,21 @@
             if ( attrs.min !== undefined && attrs.max !== undefined ) {
                 ctor = Editor.widgets['editor-slider'];
                 el = new ctor();
+
                 el.setAttribute('input','');
                 el.min = attrs.min;
                 el.max = attrs.max;
                 el.value = value;
+
                 EditorUI.bind( fieldEL, 'value', el, 'value' );
             }
             else {
                 ctor = Editor.widgets['editor-unit-input'];
                 el = new ctor();
-                el.inputValue = value;
+
                 el.min = attrs.min;
                 el.max = attrs.max;
+                el.inputValue = value;
                 EditorUI.bind( fieldEL, 'value', el, 'input-value' );
             }
             return el;
@@ -69,18 +84,22 @@
         'number': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
-            el.inputValue = value;
+
             el.min = attrs.min;
             el.max = attrs.max;
+            el.inputValue = value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
+
             return el;
         },
 
         'string': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-input'];
             var el = new ctor();
+
             el.inputValue = value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
+
             return el;
         },
 
@@ -133,18 +152,20 @@
         'fire.asset': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-asset'];
             var el = new ctor();
+
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
-            // TODO
+
             return el;
         },
 
         'fire.node': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-node'];
             var el = new ctor();
+
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
-            // TODO
+
             return el;
         },
 
@@ -152,6 +173,18 @@
             var ctor = Editor.widgets['fire-asset'];
             var el = new ctor();
 
+            el.type = 'texture';
+            el.value = value;
+            EditorUI.bind( fieldEL, 'value', el, 'value' );
+
+            return el;
+        },
+
+        'fire.bitmapfont': function ( fieldEL, value, attrs ) {
+            var ctor = Editor.widgets['fire-asset'];
+            var el = new ctor();
+
+            el.type = 'bitmap-font';
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 
