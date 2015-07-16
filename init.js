@@ -109,7 +109,7 @@
 
             // attrs.enumList
             attrs.enumList.forEach( function ( item ) {
-                el.add( item.value, item.text );
+                el.add( item.value, item.name );
             });
 
             // we must wait until menu ready
