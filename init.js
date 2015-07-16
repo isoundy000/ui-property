@@ -115,7 +115,23 @@
             // we must wait until menu ready
             fieldEL.async( function () {
                 el.value = value;
-                EditorUI.bind( fieldEL, 'value', el, 'value' );
+
+                var el1 = fieldEL;
+                var el2 = el;
+
+                // FIXME: there is a bug in iron-selector, that it can not select Number 0
+                el1.addEventListener( 'value-changed', function ( event ) {
+                    if ( event.detail.path )
+                        el2.set( event.detail.path, event.detail.value );
+                    else
+                        el2.set( 'value', event.detail.value );
+                });
+                el2.addEventListener( 'value-changed', function ( event ) {
+                    if ( event.detail.path )
+                        el1.set( event.detail.path, parseInt(event.detail.value) );
+                    else
+                        el1.set( 'value', parseInt(event.detail.value) );
+                });
             });
 
             return el;
