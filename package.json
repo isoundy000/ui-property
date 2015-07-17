@@ -1,11 +1,11 @@
 {
   "name": "ui-property",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "UI Property",
   "author": "Firebox Technology",
   "hosts": {
-    "editor-framework": "^0.3.10",
-    "engine-framework": "^0.0.1"
+    "editor-framework": "^0.3.12",
+    "engine-framework": "^0.1.0"
   },
   "main": "main.js",
   "menus": {
