@@ -169,16 +169,18 @@
             var ctor = Editor.widgets['fire-asset'];
             var el = new ctor();
 
+            el.type = 'asset';
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 
             return el;
         },
 
-        'fire.node': function ( fieldEL, value, attrs ) {
+        'fire.runtime.nodewrapper': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-node'];
             var el = new ctor();
 
+            el.type = 'fire.runtime.nodewrapper';
             el.value = value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 

@@ -51,9 +51,13 @@ Editor.registerWidget( 'editor-field', {
             return;
 
         if ( this.value === null || this.value === undefined ) {
-            type = 'null-or-undefined';
+            if ( !this.type && !this.attrs.type ) {
+                type = 'null-or-undefined';
+            }
         }
-        else {
+
+        //
+        if ( !type ) {
             if ( this.type ) {
                 type = this.type.toLowerCase();
             }
