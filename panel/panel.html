@@ -33,7 +33,7 @@
     <template>
         <h2>Property Preview</h2>
         <editor-prop value="{{annoymous}}"></editor-prop>
-        <editor-prop name="numberNoAttrs" value="{{number.value}}"></editor-prop>
+        <editor-prop name="numberNoAttrs" value="{{number.value}}" attrs="{{number.attrs}}"></editor-prop>
         <editor-prop name="stringNoAttrs" value="{{string.value}}"></editor-prop>
         <editor-prop name="booleanNoAttrs" value="{{boolean.value}}"></editor-prop>
         <editor-prop attrs="{{float.attrs}}" value="{{float.value}}"></editor-prop>
@@ -82,6 +82,10 @@ Editor.registerPanel( 'ui-property.panel', {
             value: function () {
                 return {
                     value: 20,
+                    attrs: {
+                        min: 0,
+                        max: 50,
+                    }
                 };
             },
         },

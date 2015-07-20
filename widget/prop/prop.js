@@ -82,10 +82,9 @@ Editor.registerWidget( 'editor-prop', {
             el.focus();
 
         if (typeof(this.value) === 'number' && this.slidable === true) {
-            var input = document.getElementsByTagName('editor-unit-input')[0];
             var lastValue = this.value;
             EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
-                this.value = Math.clamp(lastValue + offsetx * input.step,input.min,input.max);
+                this.value = lastValue + offsetx;
             }.bind(this),null);
         }
     },
