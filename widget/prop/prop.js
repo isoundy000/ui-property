@@ -28,6 +28,13 @@ Editor.registerWidget( 'editor-prop', {
             value: null,
             notify: true,
         },
+
+        slidable: {
+            type: Boolean,
+            value: false,
+            observer: '_slidableChanged',
+            reflectToAttribute: true,
+        },
     },
 
     ready: function () {
@@ -73,6 +80,14 @@ Editor.registerWidget( 'editor-prop', {
         var el = EditorUI.getFirstFocusableChild( this.$.field );
         if ( el )
             el.focus();
+
+        if (typeof(this.value) === 'number' && this.slidable === true) {
+            var input = document.getElementsByTagName('editor-unit-input')[0];
+            var lastValue = this.value;
+            EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
+                this.value = Math.clamp(lastValue + offsetx * input.step,input.min,input.max);
+            }.bind(this),null);
+        }
     },
 
     _onFieldMouseDown: function ( event ) {
@@ -99,6 +114,12 @@ Editor.registerWidget( 'editor-prop', {
             if ( childEL.disabled !== undefined ) {
                 childEL.disabled = event.detail.value;
             }
+        }
+    },
+
+    _slidableChanged: function () {
+        if ( typeof(this.value) !== 'number' || this.slidable !== true) {
+            this.slidable = false;
         }
     },
 });
