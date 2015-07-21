@@ -32,13 +32,18 @@ Editor.registerWidget( 'editor-prop', {
         slidable: {
             type: Boolean,
             value: false,
-            observer: '_slidableChanged',
             reflectToAttribute: true,
         },
     },
 
     ready: function () {
         this._initFocusable(this);
+    },
+
+    attached: function () {
+        if (typeof(this.value) === 'number') {
+            this.slidable = true;
+        }
     },
 
     _nameText: function ( name, attrs ) {
@@ -84,7 +89,7 @@ Editor.registerWidget( 'editor-prop', {
         if (typeof(this.value) === 'number' && this.slidable === true) {
             var lastValue = this.value;
             EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
-                this.value = lastValue + offsetx;
+                this.value = Math.clamp(lastValue + offsetx, this.attrs.min, this.attrs.max);
             }.bind(this),null);
         }
     },
@@ -113,12 +118,6 @@ Editor.registerWidget( 'editor-prop', {
             if ( childEL.disabled !== undefined ) {
                 childEL.disabled = event.detail.value;
             }
-        }
-    },
-
-    _slidableChanged: function () {
-        if ( typeof(this.value) !== 'number' || this.slidable !== true) {
-            this.slidable = false;
         }
     },
 });
