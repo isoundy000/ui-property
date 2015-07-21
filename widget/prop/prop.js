@@ -40,12 +40,6 @@ Editor.registerWidget( 'editor-prop', {
         this._initFocusable(this);
     },
 
-    attached: function () {
-        if (typeof(this.value) === 'number') {
-            this.slidable = true;
-        }
-    },
-
     _nameText: function ( name, attrs ) {
         if ( attrs && attrs.displayName ) {
             return attrs.displayName;
@@ -86,7 +80,7 @@ Editor.registerWidget( 'editor-prop', {
         if ( el )
             el.focus();
 
-        if (typeof(this.value) === 'number' && this.slidable === true) {
+        if (this.slidable) {
             var lastValue = this.value;
             EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
                 this.value = Math.clamp(lastValue + offsetx, this.attrs.min, this.attrs.max);
