@@ -20,6 +20,12 @@ Editor.registerWidget( 'editor-field', {
             observer: '_valueChanged',
         },
 
+        slidable: {
+            type: Boolean,
+            value: false,
+            notify: true,
+        },
+
         editing: {
             value: null,
             notify: true,
@@ -96,6 +102,10 @@ Editor.registerWidget( 'editor-field', {
                 Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );
                 propEL = new Editor.properties.error( 'Element create failed for type: ' + type );
             }
+        }
+
+        if ( type === 'number' ) {
+            this.set( 'slidable', true );
         }
 
         //
