@@ -170,8 +170,8 @@
             var el = new ctor();
 
             el.type = 'asset';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
 
             return el;
         },
@@ -180,9 +180,9 @@
             var ctor = Editor.widgets['fire-node'];
             var el = new ctor();
 
-            el.type = 'fire.runtime.nodewrapper';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            el.type = 'node';
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
 
             return el;
         },
@@ -192,8 +192,8 @@
             var el = new ctor();
 
             el.type = 'texture';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
 
             return el;
         },
@@ -203,8 +203,8 @@
             var el = new ctor();
 
             el.type = 'bitmap-font';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
 
             return el;
         },
@@ -214,19 +214,8 @@
             var el = new ctor();
 
             el.type = 'ttf-font';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
-
-            return el;
-        },
-
-        'fire.audioclip': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'audio-clip';
-            el.value = value;
-            EditorUI.bind( fieldEL, 'value', el, 'value' );
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
 
             return el;
         },
