@@ -165,70 +165,28 @@
             return el;
         },
 
-        'fire.asset': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'asset';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+        'fire.runtime.nodewrapper': function ( fieldEL, value, attrs ) {
+            return Editor.bindNode( fieldEL, value, attrs, 'node' );
         },
 
-        'fire.runtime.nodewrapper': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-node'];
-            var el = new ctor();
-
-            el.type = 'node';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+        'fire.asset': function ( fieldEL, value, attrs ) {
+            return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
         },
 
         'fire.texture': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'texture';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+            return Editor.bindAsset( fieldEL, value, attrs, 'texture' );
         },
 
         'fire.bitmapfont': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'bitmap-font';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+            return Editor.bindAsset( fieldEL, value, attrs, 'bitmap-font' );
         },
 
         'fire.ttffont': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'ttf-font';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+            return Editor.bindAsset( fieldEL, value, attrs, 'ttf-font' );
         },
 
         'fire.audioclip': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['fire-asset'];
-            var el = new ctor();
-
-            el.type = 'audio-clip';
-            el.value = value.uuid;
-            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
-
-            return el;
+            return Editor.bindAsset( fieldEL, value, attrs, 'audio-clip' );
         },
 
     };
@@ -236,4 +194,26 @@
     for ( var t in type2widget ) {
         Editor.properties[t] = type2widget[t];
     }
+
+    Editor.bindNode = function ( fieldEL, value, attrs, type ) {
+        var ctor = Editor.widgets['fire-node'];
+        var el = new ctor();
+
+        el.type = type;
+        el.value = value ? value.uuid : '';
+        EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
+
+        return el;
+    };
+
+    Editor.bindAsset = function ( fieldEL, value, attrs, type ) {
+        var ctor = Editor.widgets['fire-asset'];
+        var el = new ctor();
+
+        el.type = type;
+        el.value = value ? value.uuid : '';
+        EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
+
+        return el;
+    };
 })();
