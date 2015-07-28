@@ -219,6 +219,18 @@
 
             return el;
         },
+
+        'fire.audioclip': function ( fieldEL, value, attrs ) {
+            var ctor = Editor.widgets['fire-asset'];
+            var el = new ctor();
+
+            el.type = 'audio-clip';
+            el.value = value.uuid;
+            EditorUI.bindUUID( fieldEL, 'value', el, 'value' );
+
+            return el;
+        },
+
     };
 
     for ( var t in type2widget ) {
