@@ -34,7 +34,7 @@
             return div;
         },
 
-        'boolean': function ( fieldEL, value, attrs ) {
+        'Boolean': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-checkbox'];
             var el = new ctor();
 
@@ -44,7 +44,7 @@
             return el;
         },
 
-        'integer': function ( fieldEL, value, attrs ) {
+        'Integer': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
 
@@ -56,7 +56,7 @@
             return el;
         },
 
-        'float': function ( fieldEL, value, attrs ) {
+        'Float': function ( fieldEL, value, attrs ) {
             var ctor, el;
             if ( attrs.min !== undefined && attrs.max !== undefined ) {
                 ctor = Editor.widgets['editor-slider'];
@@ -81,7 +81,7 @@
             return el;
         },
 
-        'number': function ( fieldEL, value, attrs ) {
+        'Number': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
 
@@ -93,7 +93,7 @@
             return el;
         },
 
-        'string': function ( fieldEL, value, attrs ) {
+        'String': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-input'];
             var el = new ctor();
 
@@ -103,7 +103,7 @@
             return el;
         },
 
-        'enum': function ( fieldEL, value, attrs ) {
+        'Enum': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['editor-select'];
             var el = new ctor();
 
@@ -145,7 +145,7 @@
         //     return null;
         // },
 
-        'fire.vec2': function ( fieldEL, value, attrs ) {
+        'Fire.Vec2': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-vec2'];
             var el = new ctor();
 
@@ -155,7 +155,7 @@
             return el;
         },
 
-        'fire.color': function ( fieldEL, value, attrs ) {
+        'Fire.Color': function ( fieldEL, value, attrs ) {
             var ctor = Editor.widgets['fire-color'];
             var el = new ctor();
 
@@ -165,27 +165,27 @@
             return el;
         },
 
-        'fire.runtime.nodewrapper': function ( fieldEL, value, attrs ) {
+        'Fire.Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
             return Editor.bindNode( fieldEL, value, attrs, 'node' );
         },
 
-        'fire.asset': function ( fieldEL, value, attrs ) {
+        'Fire.Asset': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
         },
 
-        'fire.texture': function ( fieldEL, value, attrs ) {
+        'Fire.Texture': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'texture' );
         },
 
-        'fire.bitmapfont': function ( fieldEL, value, attrs ) {
+        'Fire.BitmapFont': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'bitmap-font' );
         },
 
-        'fire.ttffont': function ( fieldEL, value, attrs ) {
+        'Fire.TtfFont': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'ttf-font' );
         },
 
-        'fire.audioclip': function ( fieldEL, value, attrs ) {
+        'Fire.AudioClip': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'audio-clip' );
         },
 

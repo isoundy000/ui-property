@@ -65,13 +65,14 @@ Editor.registerWidget( 'editor-field', {
         //
         if ( !type ) {
             if ( this.type ) {
-                type = this.type.toLowerCase();
+                type = this.type;
             }
             else if ( this.attrs.type ) {
-                type = this.attrs.type.toLowerCase();
+                type = this.attrs.type;
             }
             else {
                 type = typeof this.value;
+                type = type.charAt(0).toUpperCase() + type.slice(1);
             }
 
             // check if type error
@@ -104,7 +105,7 @@ Editor.registerWidget( 'editor-field', {
             }
         }
 
-        if ( type === 'number' ) {
+        if ( type === 'Number' ) {
             this.set( 'slidable', true );
         }
 
