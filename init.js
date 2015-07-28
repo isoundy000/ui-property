@@ -181,7 +181,7 @@
             return Editor.bindAsset( fieldEL, value, attrs, 'bitmap-font' );
         },
 
-        'Fire.TtfFont': function ( fieldEL, value, attrs ) {
+        'Fire.TTFFont': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'ttf-font' );
         },
 
