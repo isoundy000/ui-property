@@ -169,7 +169,7 @@
             return Editor.bindNode( fieldEL, value, attrs, 'node' );
         },
 
-        'Fire.Asset': function ( fieldEL, value, attrs ) {
+        'Fire.RawAsset': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
         },
 
