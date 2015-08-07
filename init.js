@@ -165,7 +165,7 @@
             return el;
         },
 
-        'Fire.Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
+        'Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
             return Editor.bindNode( fieldEL, value, attrs, 'node' );
         },
 
