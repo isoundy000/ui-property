@@ -5,18 +5,25 @@ module.exports = {
 
     unload: function () {
         [
-            'boolean',
-            'integer',
-            'float',
-            'number',
-            'string',
-            'enum',
-            'array',
-            'object',
-            'fire.vec2',
-            'fire.color',
-            'fire.asset',
-            'fire.node',
+            'null-or-undefined',
+            'error',
+            'Boolean',
+            'Integer',
+            'Float',
+            'Number',
+            'String',
+            'Enum',
+            'Array',
+            'Object',
+            'Fire.Vec2',
+            'Fire.Color',
+            'Fire.RawAsset',
+            'Fire.Asset',
+            'Fire.Texture',
+            'Fire.BitmapFont',
+            'Fire.TTFFont',
+            'Fire.AudioClip',
+            'Runtime.NodeWrapper',
         ].forEach(function ( item ) {
             delete Editor.properties[item];
         });

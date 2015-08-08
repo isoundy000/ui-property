@@ -165,11 +165,11 @@
             return el;
         },
 
-        'Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
-            return Editor.bindNode( fieldEL, value, attrs, 'node' );
+        'Fire.RawAsset': function ( fieldEL, value, attrs ) {
+            return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
         },
 
-        'Fire.RawAsset': function ( fieldEL, value, attrs ) {
+        'Fire.Asset': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
         },
 
@@ -187,6 +187,10 @@
 
         'Fire.AudioClip': function ( fieldEL, value, attrs ) {
             return Editor.bindAsset( fieldEL, value, attrs, 'audio-clip' );
+        },
+
+        'Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
+            return Editor.bindNode( fieldEL, value, attrs, 'node' );
         },
 
     };
