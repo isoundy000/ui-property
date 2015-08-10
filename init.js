@@ -190,7 +190,7 @@
         },
 
         'Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
-            return Editor.bindNode( fieldEL, value, attrs, 'node' );
+            return Editor.bindNode( fieldEL, value, attrs, 'Runtime.NodeWrapper' );
         },
 
     };
