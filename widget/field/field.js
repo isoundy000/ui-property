@@ -5,19 +5,19 @@ Editor.registerWidget( 'editor-field', {
         type: {
             type: String,
             value: '',
-            observer: '_typeChanged',
+            // observer: '_typeChanged',
         },
 
         attrs: {
             type: Object,
             value: function () { return {}; },
-            observer: '_attrsChanged',
+            // observer: '_attrsChanged',
         },
 
         value: {
             value: null,
             notify: true,
-            observer: '_valueChanged',
+            // observer: '_valueChanged',
         },
 
         slidable: {
@@ -33,13 +33,13 @@ Editor.registerWidget( 'editor-field', {
         },
     },
 
-    ready: function () {
-        this._rebuild();
-    },
-
     factoryImpl: function ( value, attrs ) {
         this.value = value;
         this.attrs = attrs;
+    },
+
+    attached: function () {
+        this._rebuild();
     },
 
     _rebuild: function () {
@@ -64,11 +64,11 @@ Editor.registerWidget( 'editor-field', {
 
         //
         if ( !type ) {
-            if ( this.type ) {
-                type = this.type;
-            }
-            else if ( this.attrs.type ) {
+            if ( this.attrs.type ) {
                 type = this.attrs.type;
+            }
+            else if ( this.type ) {
+                type = this.type;
             }
             else {
                 type = typeof this.value;
@@ -76,12 +76,15 @@ Editor.registerWidget( 'editor-field', {
             }
 
             // check if type error
-            if ( this.type &&
-                 this.attrs.type &&
-                 this.type !== this.attrs.type )
-            {
-                Editor.error( 'Failed to create field %s. Message: type not the same %s:%s', type, this.type, this.attrs.type );
-                propEL = new Editor.properties.error('value and attr has different type');
+            if ( this.type && this.attrs.type ) {
+                if ( this.type !== this.attrs.type ) {
+                    if (this.attrs.extends &&
+                        this.attrs.extends.indexOf(type) === -1)
+                    {
+                        Editor.error( 'Failed to create field %s. Message: type not the same %s:%s', type, this.type, this.attrs.type );
+                        propEL = new Editor.properties.error('value and attr has different type');
+                    }
+                }
             }
         }
 
@@ -113,19 +116,19 @@ Editor.registerWidget( 'editor-field', {
         thisDOM.appendChild(propEL);
     },
 
-    _valueChanged: function ( newValue, oldValue ) {
-        if ( typeof oldValue !== typeof newValue ) {
-            this._rebuild();
-            return;
-        }
-    },
+    // _valueChanged: function ( newValue, oldValue ) {
+    //     if ( typeof oldValue !== typeof newValue ) {
+    //         this._rebuild();
+    //         return;
+    //     }
+    // },
 
-    _attrsChanged: function ( newValue, oldValue ) {
-        this._rebuild();
-    },
+    // _attrsChanged: function ( newValue, oldValue ) {
+    //     this._rebuild();
+    // },
 
-    _typeChanged: function () {
-        this._rebuild();
-    },
+    // _typeChanged: function () {
+    //     this._rebuild();
+    // },
 
 });
