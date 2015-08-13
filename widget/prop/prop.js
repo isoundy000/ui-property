@@ -4,12 +4,6 @@ Editor.registerWidget( 'editor-prop', {
     behaviors: [EditorUI.focusable],
 
     listeners: {
-        'focus': '_onFocus',
-        'blur': '_onBlur',
-        'focusin': '_onFocusIn',
-        'focusout': '_onFocusOut',
-        'mousedown': '_onMouseDown',
-        'keydown': '_onKeyDown',
         'disabled-changed': '_onDisabledChanged',
     },
 
@@ -39,10 +33,20 @@ Editor.registerWidget( 'editor-prop', {
             value: false,
             reflectToAttribute: true,
         },
+
+        folded: {
+            type: Boolean,
+            value: true,
+        },
+
+        foldable: {
+            type: Boolean,
+            value: false,
+        },
     },
 
     ready: function () {
-        this._initFocusable(this);
+        this._initFocusable(this.$.focus);
     },
 
     _nameText: function ( name, attrs ) {
@@ -125,5 +129,50 @@ Editor.registerWidget( 'editor-prop', {
                 childEL.disabled = event.detail.value;
             }
         }
+    },
+
+    _onFoldMouseDown: function ( event ) {
+        event.stopPropagation();
+        event.preventDefault();
+    },
+
+    _onFoldClick: function ( event ) {
+        event.stopPropagation();
+
+        if ( event.which !== 1 )
+            return;
+
+        this.folded = !this.folded;
+    },
+
+    _foldClass: function ( folded ) {
+        if ( folded ) {
+            return 'fa fa-caret-right fold flex-none';
+        }
+
+        return 'fa fa-caret-down fold flex-none';
+    },
+
+    _foldable: function ( value, type, attrs ) {
+        // if this is an array expand it
+        if ( Array.isArray(value) )
+            return true;
+
+        if ( typeof value === 'object' ) {
+            var propType = type;
+            if ( attrs && attrs.type ) {
+                propType = attrs.type;
+            }
+
+            if ( !Editor.properties[propType] ) {
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    _showSubProps: function ( value, type, folded ) {
+        return false;
     },
 });

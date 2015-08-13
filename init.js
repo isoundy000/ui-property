@@ -137,9 +137,16 @@
             return el;
         },
 
-        // 'array': function ( fieldEL, value, attrs ) {
-        //     return null;
-        // },
+        'Array': function ( fieldEL, value, attrs ) {
+            var ctor = Editor.widgets['editor-unit-input'];
+            var el = new ctor();
+
+            el.min = 0;
+            el.value = value.length;
+            EditorUI.bindArrayLength( fieldEL, 'value', el, 'value' );
+
+            return el;
+        },
 
         // 'object': function ( fieldEL, value, attrs ) {
         //     return null;

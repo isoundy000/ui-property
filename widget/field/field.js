@@ -75,6 +75,11 @@ Editor.registerWidget( 'editor-field', {
                 type = type.charAt(0).toUpperCase() + type.slice(1);
             }
 
+            //
+            if ( this.type === 'Array' || Array.isArray(this.value) ) {
+                type = 'Array';
+            }
+
             // check if type error
             if ( this.type && this.attrs.type ) {
                 if ( this.type !== this.attrs.type ) {

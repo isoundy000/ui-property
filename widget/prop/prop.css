@@ -1,8 +1,5 @@
 :host {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
+    display: block;
 
     font-size: 12px;
     box-sizing: border-box;
@@ -14,7 +11,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    color: #ccc;
+    color: #aaa;
 }
 
 .name.anonymous {
@@ -31,6 +28,26 @@
 
 :host[disabled] .name {
     color: #666;
+}
+
+.fold {
+    text-align: center;
+    width: 10px;
+    color: #aaa;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.fold:hover {
+    color: #fff;
+}
+
+.fold[foldable] {
+    visibility: visible;
+}
+
+#focus {
+    margin-left: 5px;
 }
 
 .label {
@@ -62,6 +79,6 @@
     color: #888888;
 }
 
-:host[slidable] .name{
+:host[slidable] .name {
     cursor: ew-resize;
 }
