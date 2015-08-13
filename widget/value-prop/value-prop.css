@@ -11,10 +11,12 @@
     margin-bottom: 5px;
 }
 
-.name {
+.group {
     margin-left: 15px;
     margin-right: 10px;
+}
 
+.name {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -35,4 +37,32 @@
 
 :host[disabled] .name {
     color: #666;
+}
+
+.label {
+    display: none;
+    min-width: 30px;
+    font-size: 9px;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 1px;
+    padding: .1em .5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    border-color: #e8e8e8;
+    background: #2376e4;
+
+}
+
+:host[readonly] .label{
+    display: inline-flex;
+}
+
+:host[readonly] .name {
+    color: #888888;
+}
+
+:host[slidable] .name {
+    cursor: ew-resize;
 }

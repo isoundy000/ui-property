@@ -75,20 +75,15 @@ Editor.registerWidget( 'editor-field', {
                 type = type.charAt(0).toUpperCase() + type.slice(1);
             }
 
-            //
-            if ( this.type === 'Array' || Array.isArray(this.value) ) {
-                type = 'Array';
-            }
-
             // check if type error
             if ( this.type && this.attrs.type ) {
                 if ( this.type !== this.attrs.type ) {
                     if (this.attrs.extends &&
                         this.attrs.extends.indexOf(type) === -1)
-                    {
-                        Editor.error( 'Failed to create field %s. Message: type not the same %s:%s', type, this.type, this.attrs.type );
-                        propEL = new Editor.properties.error('value and attr has different type');
-                    }
+                        {
+                            Editor.error( 'Failed to create field %s. Message: type not the same %s:%s', type, this.type, this.attrs.type );
+                            propEL = new Editor.properties.error('value and attr has different type');
+                        }
                 }
             }
         }

@@ -4,42 +4,25 @@
     <link rel="import" type="css" href="prop.css">
 
     <template>
-        <div id="mainProp" class="layout horizontal center-center">
-            <i id="foldIcon"
-                class$="[[_foldClass(folded)]]"
-                on-mousedown="_onFoldMouseDown"
-                on-click="_onFoldClick"
-                foldable$="[[_foldable(value,type,attrs)]]"
-                >
-            </i>
-            <div id="focus" class="layout horizontal flex-1 center-center"
-                on-focus="_onFocus"
-                on-blur="_onBlur"
-                on-focusin="_onFocusIn"
-                on-focusout="_onFocusOut"
-                on-mousedown="_onMouseDown"
-                on-keydown="_onKeyDown"
-                >
-                <div class="flex-1 group name">
-                    <div class$="{{_nameClass(name,attrs)}}"
-                        on-mousedown="_onMouseDown"
-                        >{{_nameText(name,attrs)}}</div>
-                    <div class="label">readonly</div>
-                </div>
-                <editor-field id="field" class="flex-2"
-                    value="{{value}}"
-                    slidable="{{slidable}}"
-                    type="[[type]]"
-                    attrs="[[attrs]]"
-                    on-mousedown="_onFieldMouseDown"
-                    >
-                </editor-field>
-            </div>
-        </div>
-        <div id="subProps" hidden="[[folded]]">
-            Hello World
-            <content></content>
-        </div>
+        <template is="dom-if" if="[[_isValueProp(type)]]">
+            <editor-value-prop
+                name="[[name]]"
+                type="[[type]]"
+                attrs="[[attrs]]"
+                value="{{value}}"
+            >
+            </editor-value-prop>
+         </template>
+
+        <template is="dom-if" if="[[_isArrayProp(type)]]">
+            <editor-array-prop
+                name="[[name]]"
+                type="[[type]]"
+                attrs="[[attrs]]"
+                value="{{value}}"
+            >
+            </editor-array-prop>
+         </template>
     </template>
 
     <script type="text/javascript" src="prop.js"></script>

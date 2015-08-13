@@ -1,0 +1,50 @@
+<link rel="import" href="../field/field.html">
+
+<dom-module id="editor-array-prop">
+    <link rel="import" type="css" href="array-prop.css">
+
+    <template>
+        <div id="mainProp" class="layout horizontal center-center">
+            <i id="foldIcon"
+                class$="[[_foldClass(folded)]]"
+                on-mousedown="_onFoldMouseDown"
+                on-click="_onFoldClick"
+                >
+            </i>
+            <div id="focus" class="layout horizontal flex-1 center-center"
+                on-focus="_onFocus"
+                on-blur="_onBlur"
+                on-focusin="_onFocusIn"
+                on-focusout="_onFocusOut"
+                on-mousedown="_onMouseDown"
+                on-keydown="_onKeyDown"
+                >
+                <div class="flex-1 group name">
+                    <div class$="{{_nameClass(name,attrs)}}"
+                        on-mousedown="_onMouseDown"
+                        >{{_nameText(name,attrs)}}</div>
+                    <div class="label">readonly</div>
+                </div>
+                <editor-unit-input id="field" class="flex-2"
+                    value="{{value.length}}"
+                    min="0"
+                    on-mousedown="_onFieldMouseDown"
+                    >
+                </editor-unit-input>
+            </div>
+        </div>
+        <div id="subProps" hidden="[[folded]]">
+            <template is="dom-repeat" items="{{value}}">
+                <editor-prop
+                    name="[[item.name]]"
+                    type="[[item.type]]"
+                    attrs="[[item.attrs]]"
+                    value="{{item.value}}"
+                >
+                </editor-prop>
+            </template>
+        </div>
+    </template>
+
+    <script type="text/javascript" src="array-prop.js"></script>
+</dom-module>

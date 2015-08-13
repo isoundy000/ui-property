@@ -16,6 +16,9 @@
   "widgets": {
     "editor-field": "widget/field/field.html",
     "editor-prop": "widget/prop/prop.html",
+    "editor-value-prop": "widget/value-prop/value-prop.html",
+    "editor-array-prop": "widget/array-prop/array-prop.html",
+    "editor-object-prop": "widget/object-prop/object-prop.html",
     "editor-custom-prop": "widget/custom-prop/custom-prop.html"
   },
   "panels": {

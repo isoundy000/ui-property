@@ -13,8 +13,6 @@ module.exports = {
             'Number',
             'String',
             'Enum',
-            'Array',
-            'Object',
             'Fire.Vec2',
             'Fire.Color',
             'Fire.RawAsset',
