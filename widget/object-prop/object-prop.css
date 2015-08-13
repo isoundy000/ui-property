@@ -1,3 +1,84 @@
 :host {
     display: block;
+
+    font-size: 12px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    min-height: 22px;
+}
+
+.name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #aaa;
+}
+
+.name.anonymous {
+    color: #888;
+}
+
+:host[focused] .name {
+    color: #00a6ff;
+}
+
+:host[disabled] * {
+    pointer-events: none;
+}
+
+:host[disabled] .name {
+    color: #666;
+}
+
+.fold {
+    text-align: center;
+    width: 10px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.fold:hover {
+    color: #fff;
+}
+
+#focus {
+    margin-left: 5px;
+}
+
+#subProps {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.label {
+    display: none;
+    min-width: 30px;
+    font-size: 9px;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 1px;
+    padding: .1em .5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    border-color: #e8e8e8;
+    background: #2376e4;
+
+}
+
+.group {
+    display: flex;
+    margin-right: 10px;
+}
+
+:host[readonly] .label{
+    display: inline-flex;
+}
+
+:host[readonly] .name {
+    color: #888888;
+}
+
+:host[slidable] .name {
+    cursor: ew-resize;
 }
