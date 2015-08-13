@@ -26,9 +26,10 @@
                     <div class="label">readonly</div>
                 </div>
                 <editor-unit-input id="field" class="flex-2"
-                    value="{{value.length}}"
+                    value="[[value.length]]"
                     min="0"
                     on-mousedown="_onFieldMouseDown"
+                    on-value-changed="_onArrayLengthChanged"
                     >
                 </editor-unit-input>
             </div>

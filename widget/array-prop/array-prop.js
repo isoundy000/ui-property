@@ -147,4 +147,8 @@ Editor.registerWidget( 'editor-array-prop', {
 
         return 'fa fa-caret-down fold flex-none';
     },
+
+    _onArrayLengthChanged: function ( event ) {
+        this.notifyPath('value.length', event.detail.value );
+    },
 });
