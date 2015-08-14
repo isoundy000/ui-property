@@ -5,16 +5,16 @@
 
     <template>
         <div class="layout horizontal flex-1 group">
-            <div class$="{{_nameClass(name,attrs)}}"
+            <div class$="{{_nameClass(prop.name,prop.attrs)}}"
                 on-mousedown="_onMouseDown"
-                >{{_nameText(name,attrs)}}</div>
+                >{{_nameText(prop.name,prop.attrs)}}</div>
             <div class="label">readonly</div>
         </div>
         <editor-field id="field" class="flex-2"
-            path="[[path]]"
-            type="[[type]]"
-            attrs="[[attrs]]"
-            value="{{value}}"
+            path="[[prop.path]]"
+            type="[[prop.type]]"
+            attrs="[[prop.attrs]]"
+            value="{{prop.value}}"
             slidable="{{slidable}}"
             on-mousedown="_onFieldMouseDown"
             >

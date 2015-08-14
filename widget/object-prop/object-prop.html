@@ -20,22 +20,16 @@
                 on-keydown="_onKeyDown"
                 >
                 <div class="flex-1 group name">
-                    <div class$="{{_nameClass(name,attrs)}}"
+                    <div class$="{{_nameClass(prop.name,prop.attrs)}}"
                         on-mousedown="_onMouseDown"
-                        >{{_nameText(name,attrs)}}</div>
+                        >{{_nameText(prop.name,prop.attrs)}}</div>
                     <div class="label">readonly</div>
                 </div>
             </div>
         </div>
         <div id="subProps" hidden="[[folded]]">
-            <template is="dom-repeat" items="{{value.__props__}}">
-                <editor-prop
-                    name="[[item.name]]"
-                    type="[[item.type]]"
-                    attrs="[[item.attrs]]"
-                    value="{{item.value}}"
-                >
-                </editor-prop>
+            <template is="dom-repeat" items="{{prop.value.__props__}}">
+                <editor-prop prop="{{item}}"></editor-prop>
             </template>
         </div>
     </template>

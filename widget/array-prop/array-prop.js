@@ -8,23 +8,16 @@ Editor.registerWidget( 'editor-array-prop', {
     },
 
     properties: {
-        type: {
-            type: String,
-            value: '',
-        },
-
-        name: {
-            type: String,
-            value: '',
-        },
-
-        attrs: {
-            type: Object,
-            value: function () { return {}; },
-        },
-
-        value: {
-            value: function () { return []; },
+        prop: {
+            value: function () {
+                return {
+                    path: '',
+                    type: '',
+                    name: '',
+                    attrs: {},
+                    value: [],
+                };
+            },
             notify: true,
         },
 
@@ -129,6 +122,6 @@ Editor.registerWidget( 'editor-array-prop', {
     },
 
     _onArrayLengthChanged: function ( event ) {
-        this.notifyPath('value.length', event.detail.value );
+        this.notifyPath('prop.value.length', event.detail.value );
     },
 });

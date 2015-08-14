@@ -8,23 +8,16 @@ Editor.registerWidget( 'editor-object-prop', {
     },
 
     properties: {
-        type: {
-            type: String,
-            value: '',
-        },
-
-        name: {
-            type: String,
-            value: '',
-        },
-
-        attrs: {
-            type: Object,
-            value: function () { return {}; },
-        },
-
-        value: {
-            value: function () { return {}; },
+        prop: {
+            value: function () {
+                return {
+                    path: '',
+                    type: '',
+                    name: '',
+                    attrs: {},
+                    value: null,
+                };
+            },
             notify: true,
         },
 

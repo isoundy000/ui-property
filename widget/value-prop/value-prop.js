@@ -14,28 +14,16 @@ Editor.registerWidget( 'editor-value-prop', {
     },
 
     properties: {
-        path: {
-            type: String,
-            value: '',
-        },
-
-        name: {
-            type: String,
-            value: '',
-        },
-
-        type: {
-            type: String,
-            value: '',
-        },
-
-        attrs: {
-            type: Object,
-            value: function () { return {}; },
-        },
-
-        value: {
-            value: null,
+        prop: {
+            value: function () {
+                return {
+                    path: '',
+                    type: '',
+                    name: '',
+                    attrs: {},
+                    value: null,
+                };
+            },
             notify: true,
         },
 
@@ -91,16 +79,16 @@ Editor.registerWidget( 'editor-value-prop', {
             el.focus();
 
         if (this.slidable) {
-            var lastValue = this.value;
+            var lastValue = this.prop.value;
 
             var min = Number.NEGATIVE_INFINITY;
-            if ( typeof this.attrs.min === 'number' ) min = this.attrs.min;
+            if ( typeof this.prop.attrs.min === 'number' ) min = this.prop.attrs.min;
 
             var max = Number.POSITIVE_INFINITY;
-            if ( typeof this.attrs.max === 'number' ) max = this.attrs.max;
+            if ( typeof this.prop.attrs.max === 'number' ) max = this.prop.attrs.max;
 
             EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
-                this.value = Math.clamp(lastValue + offsetx, min, max);
+                this.set('prop.value', Math.clamp(lastValue + offsetx, min, max));
             }.bind(this),null);
         }
     },

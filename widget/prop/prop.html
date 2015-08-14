@@ -4,36 +4,17 @@
     <link rel="import" type="css" href="prop.css">
 
     <template>
-        <template is="dom-if" if="[[_isValueProp(type)]]">
-            <editor-value-prop
-                path="[[path]]"
-                name="[[name]]"
-                type="[[type]]"
-                attrs="[[attrs]]"
-                value="{{value}}"
-            >
-            </editor-value-prop>
-         </template>
+        <template is="dom-if" if="[[_isValueProp(prop.type)]]">
+            <editor-value-prop prop="{{prop}}"></editor-value-prop>
+        </template>
 
-        <template is="dom-if" if="[[_isArrayProp(type)]]">
-            <editor-array-prop
-                name="[[name]]"
-                type="[[type]]"
-                attrs="[[attrs]]"
-                value="{{value}}"
-            >
-            </editor-array-prop>
-         </template>
+        <template is="dom-if" if="[[_isArrayProp(prop.type)]]">
+            <editor-array-prop prop="{{prop}}"></editor-array-prop>
+        </template>
 
-        <template is="dom-if" if="[[_isObjectProp(type)]]">
-            <editor-object-prop
-                name="[[name]]"
-                type="[[type]]"
-                attrs="[[attrs]]"
-                value="{{value}}"
-            >
-            </editor-object-prop>
-         </template>
+        <template is="dom-if" if="[[_isObjectProp(prop.type)]]">
+            <editor-object-prop prop="{{prop}}"></editor-object-prop>
+        </template>
     </template>
 
     <script type="text/javascript" src="prop.js"></script>
