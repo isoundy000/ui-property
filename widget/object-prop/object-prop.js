@@ -67,9 +67,10 @@ Editor.registerWidget( 'editor-object-prop', {
         event.preventDefault();
         event.stopPropagation();
 
-        var el = EditorUI.getFirstFocusableChild( this.$.field );
-        if ( el )
-            el.focus();
+        // TODO
+        // var el = EditorUI.getFirstFocusableChild( this.$.field );
+        // if ( el )
+        //     el.focus();
     },
 
     _onFieldMouseDown: function ( event ) {
