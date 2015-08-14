@@ -6,6 +6,7 @@
     <template>
         <template is="dom-if" if="[[_isValueProp(type)]]">
             <editor-value-prop
+                path="[[path]]"
                 name="[[name]]"
                 type="[[type]]"
                 attrs="[[attrs]]"
@@ -22,6 +23,16 @@
                 value="{{value}}"
             >
             </editor-array-prop>
+         </template>
+
+        <template is="dom-if" if="[[_isObjectProp(type)]]">
+            <editor-object-prop
+                name="[[name]]"
+                type="[[type]]"
+                attrs="[[attrs]]"
+                value="{{value}}"
+            >
+            </editor-object-prop>
          </template>
     </template>
 

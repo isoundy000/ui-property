@@ -1,21 +1,14 @@
 (function () {
     var type2widget = {
-        'null-or-undefined': function ( fieldEL, value, attrs ) {
-            var ctor = Editor.widgets['editor-label'];
+        'null-or-undefined': function ( fieldEL, info ) {
+            var ctor = Editor.widgets['editor-null-field'];
             var el = new ctor();
 
-            el.classList.add('mini');
-            if ( value === null )
-                Polymer.dom(el).innerHTML = 'null';
-            else
-                Polymer.dom(el).innerHTML = 'undefined';
+            el.path = info.path;
+            el.type = info.attrs.type;
+            el.label = info.value === null ? 'null' : 'undefined';
 
-            // TODO
-            // // add a create button
-            // ctor = Editor.widgets['editor-button'];
-            // var btnEL = new ctor();
-            // Polymer.dom(btnEL).innerHTML = 'Create';
-            // Polymer.dom(fieldEL).appendChild(btnEL);
+            EditorUI.bind( fieldEL, 'value', el, 'value' );
 
             return el;
         },
@@ -34,38 +27,38 @@
             return div;
         },
 
-        'Boolean': function ( fieldEL, value, attrs ) {
+        'Boolean': function ( fieldEL, info ) {
             var ctor = Editor.widgets['editor-checkbox'];
             var el = new ctor();
 
-            el.checked = value;
+            el.checked = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'checked' );
 
             return el;
         },
 
-        'Integer': function ( fieldEL, value, attrs ) {
+        'Integer': function ( fieldEL, info ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
 
-            el.min = attrs.min;
-            el.max = attrs.max;
-            el.inputValue = value;
+            el.min = info.attrs.min;
+            el.max = info.attrs.max;
+            el.inputValue = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
 
             return el;
         },
 
-        'Float': function ( fieldEL, value, attrs ) {
+        'Float': function ( fieldEL, info ) {
             var ctor, el;
-            if ( attrs.min !== undefined && attrs.max !== undefined ) {
+            if ( info.attrs.min !== undefined && info.attrs.max !== undefined ) {
                 ctor = Editor.widgets['editor-slider'];
                 el = new ctor();
 
                 el.setAttribute('input','');
-                el.min = attrs.min;
-                el.max = attrs.max;
-                el.value = value;
+                el.min = info.attrs.min;
+                el.max = info.attrs.max;
+                el.value = info.value;
 
                 EditorUI.bind( fieldEL, 'value', el, 'value' );
             }
@@ -73,48 +66,48 @@
                 ctor = Editor.widgets['editor-unit-input'];
                 el = new ctor();
 
-                el.min = attrs.min;
-                el.max = attrs.max;
-                el.inputValue = value;
+                el.min = info.attrs.min;
+                el.max = info.attrs.max;
+                el.inputValue = info.value;
                 EditorUI.bind( fieldEL, 'value', el, 'input-value' );
             }
             return el;
         },
 
-        'Number': function ( fieldEL, value, attrs ) {
+        'Number': function ( fieldEL, info ) {
             var ctor = Editor.widgets['editor-unit-input'];
             var el = new ctor();
 
-            el.min = attrs.min;
-            el.max = attrs.max;
-            el.inputValue = value;
+            el.min = info.attrs.min;
+            el.max = info.attrs.max;
+            el.inputValue = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
 
             return el;
         },
 
-        'String': function ( fieldEL, value, attrs ) {
+        'String': function ( fieldEL, info ) {
             var ctor = Editor.widgets['editor-input'];
             var el = new ctor();
 
-            el.inputValue = value;
+            el.inputValue = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
 
             return el;
         },
 
-        'Enum': function ( fieldEL, value, attrs ) {
+        'Enum': function ( fieldEL, info ) {
             var ctor = Editor.widgets['editor-select'];
             var el = new ctor();
 
             // attrs.enumList
-            attrs.enumList.forEach( function ( item ) {
+            info.attrs.enumList.forEach( function ( item ) {
                 el.add( item.value, item.name );
             });
 
             // we must wait until menu ready
             fieldEL.async( function () {
-                el.value = value;
+                el.value = info.value;
 
                 var el1 = fieldEL;
                 var el2 = el;
@@ -137,52 +130,52 @@
             return el;
         },
 
-        'Fire.Vec2': function ( fieldEL, value, attrs ) {
+        'Fire.Vec2': function ( fieldEL, info ) {
             var ctor = Editor.widgets['fire-vec2'];
             var el = new ctor();
 
-            el.value = value;
+            el.value = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 
             return el;
         },
 
-        'Fire.Color': function ( fieldEL, value, attrs ) {
+        'Fire.Color': function ( fieldEL, info ) {
             var ctor = Editor.widgets['fire-color'];
             var el = new ctor();
 
-            el.value = value;
+            el.value = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 
             return el;
         },
 
-        'Fire.RawAsset': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
+        'Fire.RawAsset': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'raw-asset' );
         },
 
-        'Fire.Asset': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'asset' );
+        'Fire.Asset': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'asset' );
         },
 
-        'Fire.Texture': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'texture' );
+        'Fire.Texture': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'texture' );
         },
 
-        'Fire.BitmapFont': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'bitmap-font' );
+        'Fire.BitmapFont': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'bitmap-font' );
         },
 
-        'Fire.TTFFont': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'ttf-font' );
+        'Fire.TTFFont': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'ttf-font' );
         },
 
-        'Fire.AudioClip': function ( fieldEL, value, attrs ) {
-            return Editor.bindAsset( fieldEL, value, attrs, 'audio-clip' );
+        'Fire.AudioClip': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'audio-clip' );
         },
 
-        'Runtime.NodeWrapper': function ( fieldEL, value, attrs ) {
-            return Editor.bindNode( fieldEL, value, attrs, 'Runtime.NodeWrapper' );
+        'Runtime.NodeWrapper': function ( fieldEL, info ) {
+            return Editor.bindNode( fieldEL, info.value, info.attrs, 'Runtime.NodeWrapper' );
         },
 
     };

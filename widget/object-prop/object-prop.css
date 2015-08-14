@@ -14,6 +14,10 @@
     color: #aaa;
 }
 
+.name:hover {
+    color: #f90;
+}
+
 .name.anonymous {
     color: #888;
 }
@@ -77,8 +81,4 @@
 
 :host[readonly] .name {
     color: #888888;
-}
-
-:host[slidable] .name {
-    cursor: ew-resize;
 }

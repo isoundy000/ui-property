@@ -2,6 +2,11 @@ Editor.registerWidget( 'editor-field', {
     is: 'editor-field',
 
     properties: {
+        path: {
+            type: String,
+            value: '',
+        },
+
         type: {
             type: String,
             value: '',
@@ -57,9 +62,7 @@ Editor.registerWidget( 'editor-field', {
             return;
 
         if ( this.value === null || this.value === undefined ) {
-            if ( !this.type && !this.attrs.type ) {
-                type = 'null-or-undefined';
-            }
+            type = 'null-or-undefined';
         }
 
         //
@@ -100,7 +103,12 @@ Editor.registerWidget( 'editor-field', {
         // try to create propEL
         if ( !propEL ) {
             try {
-                propEL = propCreator( this, this.value, this.attrs );
+                propEL = propCreator( this, {
+                    value: this.value,
+                    attrs: this.attrs,
+                    type: this.type,
+                    path: this.path,
+                });
             }
             catch ( error ) {
                 Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );
@@ -108,7 +116,7 @@ Editor.registerWidget( 'editor-field', {
             }
         }
 
-        if ( type === 'Number' ) {
+        if ( type === 'Number' || type === 'Float' || type === 'Integer' ) {
             this.set( 'slidable', true );
         }
 

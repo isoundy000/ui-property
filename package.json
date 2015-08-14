@@ -15,6 +15,7 @@
   },
   "widgets": {
     "editor-field": "widget/field/field.html",
+    "editor-null-field": "widget/null-field/null-field.html",
     "editor-prop": "widget/prop/prop.html",
     "editor-value-prop": "widget/value-prop/value-prop.html",
     "editor-array-prop": "widget/array-prop/array-prop.html",

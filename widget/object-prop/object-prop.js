@@ -28,12 +28,6 @@ Editor.registerWidget( 'editor-object-prop', {
             notify: true,
         },
 
-        slidable: {
-            type: Boolean,
-            value: false,
-            reflectToAttribute: true,
-        },
-
         folded: {
             type: Boolean,
             value: true,
@@ -83,20 +77,6 @@ Editor.registerWidget( 'editor-object-prop', {
         var el = EditorUI.getFirstFocusableChild( this.$.field );
         if ( el )
             el.focus();
-
-        if (this.slidable) {
-            var lastValue = this.value;
-
-            var min = Number.NEGATIVE_INFINITY;
-            if ( typeof this.attrs.min === 'number' ) min = this.attrs.min;
-
-            var max = Number.POSITIVE_INFINITY;
-            if ( typeof this.attrs.max === 'number' ) max = this.attrs.max;
-
-            EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
-                this.value = Math.clamp(lastValue + offsetx, min, max);
-            }.bind(this),null);
-        }
     },
 
     _onFieldMouseDown: function ( event ) {

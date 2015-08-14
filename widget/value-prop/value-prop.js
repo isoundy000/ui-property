@@ -14,12 +14,17 @@ Editor.registerWidget( 'editor-value-prop', {
     },
 
     properties: {
-        type: {
+        path: {
             type: String,
             value: '',
         },
 
         name: {
+            type: String,
+            value: '',
+        },
+
+        type: {
             type: String,
             value: '',
         },

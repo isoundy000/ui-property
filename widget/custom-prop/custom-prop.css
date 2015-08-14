@@ -21,6 +21,10 @@
     color: #aaa;
 }
 
+.name:hover {
+    color: #f90;
+}
+
 .name.anonymous {
     color: #888;
 }
