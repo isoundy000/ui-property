@@ -55,12 +55,12 @@ Editor.registerWidget( 'editor-object-prop', {
 
     _onFocusIn: function ( event ) {
         this._setFocused(true);
-        this.$.field.editing = true;
+        // this.$.field.editing = true;
     },
 
     _onFocusOut: function ( event ) {
         this._setFocused(false);
-        this.$.field.editing = false;
+        // this.$.field.editing = false;
     },
 
     _onMouseDown: function ( event ) {
@@ -84,20 +84,20 @@ Editor.registerWidget( 'editor-object-prop', {
             event.preventDefault();
             event.stopPropagation();
 
-            var el = EditorUI.getFirstFocusableChild( this.$.field );
-            if ( el )
-                el.focus();
+            // var el = EditorUI.getFirstFocusableChild( this.$.field );
+            // if ( el )
+            //     el.focus();
         }
     },
 
     _onDisabledChanged: function ( event ) {
-        var children = Polymer.dom(this.$.field).children;
-        for ( var i = 0; i < children.length; ++i ) {
-            var childEL = children[i];
-            if ( childEL.disabled !== undefined ) {
-                childEL.disabled = event.detail.value;
-            }
-        }
+        // var children = Polymer.dom(this.$.field).children;
+        // for ( var i = 0; i < children.length; ++i ) {
+        //     var childEL = children[i];
+        //     if ( childEL.disabled !== undefined ) {
+        //         childEL.disabled = event.detail.value;
+        //     }
+        // }
     },
 
     _onFoldMouseDown: function ( event ) {

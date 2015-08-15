@@ -20,7 +20,7 @@ Editor.registerWidget( 'editor-null-field', {
 
     _onCreateClick: function ( event ) {
         event.stopPropagation();
-        this.fire('create-prop', {
+        this.fire('new-prop', {
             path: this.path,
             type: this.type,
         });
