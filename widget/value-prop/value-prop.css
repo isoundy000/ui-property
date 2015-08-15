@@ -16,10 +16,21 @@
     margin-right: 10px;
 }
 
+.group[readonly] .name {
+    color: #888888;
+}
+
+.group[readonly] .label {
+    display: block;
+}
+
 .name {
+    min-width: 30px;
+
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+
     color: #aaa;
 }
 
@@ -29,6 +40,24 @@
 
 .name.anonymous {
     color: #888;
+}
+
+.label {
+    display: none;
+
+    font-size: 9px;
+    font-weight: bold;
+    font-style: italic;
+    padding: .1em .5em;
+    min-width: 20px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    border-radius: 1px;
+    border-color: #e8e8e8;
+    background: #2376e4;
 }
 
 :host[focused] .name {
@@ -41,30 +70,6 @@
 
 :host[disabled] .name {
     color: #666;
-}
-
-.label {
-    display: none;
-    min-width: 30px;
-    font-size: 9px;
-    font-weight: bold;
-    font-style: italic;
-    border-radius: 1px;
-    padding: .1em .5em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    border-color: #e8e8e8;
-    background: #2376e4;
-
-}
-
-:host[readonly] .label{
-    display: inline-flex;
-}
-
-:host[readonly] .name {
-    color: #888888;
 }
 
 :host[slidable] .name {

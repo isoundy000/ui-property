@@ -109,6 +109,7 @@ Editor.registerWidget( 'editor-field', {
                     type: this.type,
                     path: this.path,
                 });
+                propEL.readonly = this.attrs.readonly;
             }
             catch ( error ) {
                 Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );

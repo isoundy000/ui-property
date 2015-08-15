@@ -17,7 +17,7 @@
                 on-mousedown="_onMouseDown"
                 on-keydown="_onKeyDown"
                 >
-                <div class="flex-1 group name">
+                <div class="layout horizontal flex-1 group" readonly$="{{prop.attrs.readonly}}">
                     <div class$="{{_nameClass(prop.name,prop.attrs)}}"
                         on-mousedown="_onMouseDown"
                         >{{_nameText(prop.name,prop.attrs)}}</div>

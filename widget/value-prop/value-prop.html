@@ -4,7 +4,7 @@
     <link rel="import" type="css" href="value-prop.css">
 
     <template>
-        <div class="layout horizontal flex-1 group">
+        <div class="layout horizontal flex-1 group" readonly$="{{prop.attrs.readonly}}">
             <div class$="{{_nameClass(prop.name,prop.attrs)}}"
                 on-mousedown="_onMouseDown"
                 >{{_nameText(prop.name,prop.attrs)}}</div>
