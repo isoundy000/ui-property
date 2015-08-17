@@ -31,6 +31,14 @@ Editor.registerWidget( 'editor-field', {
             notify: true,
         },
 
+        disabled: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            reflectToAttribute: true,
+            observer: '_disabledChanged',
+        },
+
         editing: {
             value: null,
             notify: true,
@@ -110,6 +118,7 @@ Editor.registerWidget( 'editor-field', {
                     path: this.path,
                 });
                 propEL.readonly = this.attrs.readonly;
+                propEL.disabled = this.disabled;
             }
             catch ( error ) {
                 Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );
@@ -139,5 +148,12 @@ Editor.registerWidget( 'editor-field', {
     // _typeChanged: function () {
     //     this._rebuild();
     // },
+
+    _disabledChanged: function ( newValue, oldValue ) {
+        var thisDOM = Polymer.dom(this);
+        if ( thisDOM.firstChild ) {
+            thisDOM.firstChild.disabled = newValue;
+        }
+    },
 
 });

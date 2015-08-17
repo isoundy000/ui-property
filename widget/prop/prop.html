@@ -5,15 +5,18 @@
 
     <template>
         <template is="dom-if" if="[[_isValueProp(prop.type)]]">
-            <editor-value-prop prop="{{prop}}"></editor-value-prop>
+            <editor-value-prop prop="{{prop}}" disabled="{{disabled}}">
+            </editor-value-prop>
         </template>
 
         <template is="dom-if" if="[[_isArrayProp(prop.type)]]">
-            <editor-array-prop prop="{{prop}}"></editor-array-prop>
+            <editor-array-prop prop="{{prop}}" disabled="{{disabled}}">
+            </editor-array-prop>
         </template>
 
         <template is="dom-if" if="[[_isObjectProp(prop.type)]]">
-            <editor-object-prop prop="{{prop}}"></editor-object-prop>
+            <editor-object-prop prop="{{prop}}" disabled="{{disabled}}">
+            </editor-object-prop>
         </template>
     </template>
 

@@ -14,6 +14,13 @@ Editor.registerWidget( 'editor-prop', {
             },
             notify: true,
         },
+
+        disabled: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            reflectToAttribute: true,
+        },
     },
 
     ready: function () {

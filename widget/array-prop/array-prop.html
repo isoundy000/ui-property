@@ -16,6 +16,7 @@
                 on-focusout="_onFocusOut"
                 on-mousedown="_onMouseDown"
                 on-keydown="_onKeyDown"
+                disabled="[[disabled]]"
                 >
                 <div class="layout horizontal flex-1 group" readonly$="{{prop.attrs.readonly}}">
                     <div class$="{{_nameClass(prop.name,prop.attrs)}}"
@@ -28,13 +29,14 @@
                     min="0"
                     on-mousedown="_onFieldMouseDown"
                     on-value-changed="_onArrayLengthChanged"
+                    disabled="[[disabled]]"
                     >
                 </editor-unit-input>
             </div>
         </div>
         <div id="subProps" hidden="[[folded]]">
             <template is="dom-repeat" items="{{prop.value}}">
-                <editor-prop prop="{{item}}"></editor-prop>
+                <editor-prop prop="{{item}}" disabled="[[disabled]]"></editor-prop>
             </template>
         </div>
     </template>
