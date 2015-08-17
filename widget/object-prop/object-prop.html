@@ -27,7 +27,7 @@
         </div>
         <div id="subProps" hidden="[[folded]]">
             <template is="dom-repeat" items="{{prop.value.__props__}}">
-                <editor-prop prop="{{item}}"></editor-prop>
+                <editor-prop prop="{{item}}" disabled="[[disabled]]"></editor-prop>
             </template>
         </div>
     </template>

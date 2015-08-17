@@ -10,7 +10,6 @@ Editor.registerWidget( 'editor-value-prop', {
         'focusout': '_onFocusOut',
         'mousedown': '_onMouseDown',
         'keydown': '_onKeyDown',
-        'disabled-changed': '_onDisabledChanged',
     },
 
     properties: {
@@ -107,16 +106,6 @@ Editor.registerWidget( 'editor-value-prop', {
             var el = EditorUI.getFirstFocusableChild( this.$.field );
             if ( el )
                 el.focus();
-        }
-    },
-
-    _onDisabledChanged: function ( event ) {
-        var children = Polymer.dom(this.$.field).children;
-        for ( var i = 0; i < children.length; ++i ) {
-            var childEL = children[i];
-            if ( childEL.disabled !== undefined ) {
-                childEL.disabled = event.detail.value;
-            }
         }
     },
 });
