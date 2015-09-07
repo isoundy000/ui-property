@@ -10,19 +10,19 @@ Editor.registerWidget( 'editor-field', {
         type: {
             type: String,
             value: '',
-            // observer: '_typeChanged',
+            observer: '_typeChanged',
         },
 
         attrs: {
             type: Object,
             value: function () { return {}; },
-            // observer: '_attrsChanged',
+            observer: '_attrsChanged',
         },
 
         value: {
             value: null,
             notify: true,
-            // observer: '_valueChanged',
+            observer: '_valueChanged',
         },
 
         slidable: {
@@ -51,12 +51,23 @@ Editor.registerWidget( 'editor-field', {
         this.attrs = attrs;
     },
 
-    attached: function () {
-        this._rebuild();
+    ready: function () {
+        this.rebuild();
+    },
+
+    rebuild: function () {
+        this.debounce ('rebuild', function () {
+            this._rebuild();
+        }, 50);
     },
 
     _rebuild: function () {
-        if ( this.editing )
+        // if ( this.editing )
+        //     return;
+
+        // NOTE: never rebuild when type is Object or Array, this is because it will
+        //       go to the object-prop and array-prop instead
+        if ( this.type === 'Object' || this.type === 'Array' )
             return;
 
         var thisDOM = Polymer.dom(this);
@@ -134,20 +145,17 @@ Editor.registerWidget( 'editor-field', {
         thisDOM.appendChild(propEL);
     },
 
-    // _valueChanged: function ( newValue, oldValue ) {
-    //     if ( typeof oldValue !== typeof newValue ) {
-    //         this._rebuild();
-    //         return;
-    //     }
-    // },
+    _valueChanged: function ( newValue, oldValue ) {
+        this.rebuild();
+    },
 
-    // _attrsChanged: function ( newValue, oldValue ) {
-    //     this._rebuild();
-    // },
+    _attrsChanged: function ( newValue, oldValue ) {
+        this.rebuild();
+    },
 
-    // _typeChanged: function () {
-    //     this._rebuild();
-    // },
+    _typeChanged: function ( newValue, oldValue ) {
+        this.rebuild();
+    },
 
     _disabledChanged: function ( newValue, oldValue ) {
         var thisDOM = Polymer.dom(this);
