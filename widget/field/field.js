@@ -146,7 +146,17 @@ Editor.registerWidget( 'editor-field', {
     },
 
     _valueChanged: function ( newValue, oldValue ) {
-        this.rebuild();
+        if ( oldValue === null || oldValue === undefined ) {
+            if ( newValue !== null && newValue !== undefined ) {
+                this.rebuild();
+                return;
+            }
+        }
+
+        if ( typeof newValue !== typeof oldValue ) {
+            this.rebuild();
+            return;
+        }
     },
 
     _attrsChanged: function ( newValue, oldValue ) {
