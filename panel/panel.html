@@ -67,151 +67,149 @@
             </span>
         </div>
     </template>
+
+    <script>
+        Editor.registerPanel( 'ui-property.panel', {
+            properties: {
+                annoymous: {
+                    type: Number,
+                    value: 0,
+                },
+
+                number: {
+                    value: function () {
+                        return {
+                            value: 20,
+                        };
+                    },
+                },
+
+                minMaxNumber: {
+                    value: function() {
+                        return {
+                            value: 10,
+                            attrs: {
+                                min: 0,
+                                max: 50
+                            }
+                        }
+                    },
+                },
+
+                string: {
+                    value: function () {
+                        return {
+                            value: 'this is foobar',
+                        };
+                    },
+                },
+
+                boolean: {
+                    value: function () {
+                        return {
+                            value: false,
+                        };
+                    },
+                },
+
+                float: {
+                    value: function () {
+                        return {
+                            value: 123.456,
+                            attrs: {
+                                displayName: 'Float',
+                                type: 'float',
+                            },
+                        };
+                    },
+                },
+
+                floatMinMax: {
+                    value: function () {
+                        return {
+                            value: 20,
+                            attrs: {
+                                displayName: 'Float With Min Max',
+                                type: 'float',
+                                min: 10.0,
+                                max: 200.0,
+                            },
+                        };
+                    },
+                },
+
+                integer: {
+                    value: function () {
+                        return {
+                            value: 210,
+                            attrs: {
+                                displayName: 'Integer',
+                                type: 'integer',
+                            },
+                        };
+                    },
+                },
+
+                integerMinMax: {
+                    value: function () {
+                        return {
+                            value: 30,
+                            attrs: {
+                                displayName: 'Integer With Min Max',
+                                type: 'integer',
+                                min: 20,
+                                max: 50,
+                            },
+                        };
+                    },
+                },
+
+                enum: {
+                    value: function () {
+                        return {
+                            value: 'green',
+                            attrs: {
+                                displayName: 'Enum',
+                                type: 'enum',
+                                enumList: [
+                                    { value: 'green', name: 'Green' },
+                                    { value: 'blue', name: 'Blue' },
+                                    { value: 'yellow', name: 'Yellow' },
+                                    { value: 'red', name: 'Red' },
+                                ],
+                            },
+                        };
+                    },
+                },
+
+                vec2: {
+                    value: function () {
+                        return {
+                            value: new Fire.Vec2(10,20),
+                            attrs: {
+                                displayName: 'Fire.Vec2',
+                                type: 'Fire.Vec2',
+                            },
+                        };
+                    },
+                },
+
+                color: {
+                    value: function () {
+                        return {
+                            value: new Fire.Color( 1, 1, 1, 0.5 ),
+                            attrs: {
+                                displayName: 'Fire.Color',
+                                type: 'Fire.Color',
+                            },
+                        };
+                    },
+                },
+            },
+
+            ready: function () {
+            },
+        });
+
+    </script>
 </dom-module>
-
-<script>
-Editor.registerPanel( 'ui-property.panel', {
-    is: 'ui-property-preview',
-
-    properties: {
-        annoymous: {
-            type: Number,
-            value: 0,
-        },
-
-        number: {
-            value: function () {
-                return {
-                    value: 20,
-                };
-            },
-        },
-
-        minMaxNumber: {
-            value: function() {
-                return {
-                    value: 10,
-                    attrs: {
-                        min: 0,
-                        max: 50
-                    }
-                }
-            },
-        },
-
-        string: {
-            value: function () {
-                return {
-                    value: 'this is foobar',
-                };
-            },
-        },
-
-        boolean: {
-            value: function () {
-                return {
-                    value: false,
-                };
-            },
-        },
-
-        float: {
-            value: function () {
-                return {
-                    value: 123.456,
-                    attrs: {
-                        displayName: 'Float',
-                        type: 'float',
-                    },
-                };
-            },
-        },
-
-        floatMinMax: {
-            value: function () {
-                return {
-                    value: 20,
-                    attrs: {
-                        displayName: 'Float With Min Max',
-                        type: 'float',
-                        min: 10.0,
-                        max: 200.0,
-                    },
-                };
-            },
-        },
-
-        integer: {
-            value: function () {
-                return {
-                    value: 210,
-                    attrs: {
-                        displayName: 'Integer',
-                        type: 'integer',
-                    },
-                };
-            },
-        },
-
-        integerMinMax: {
-            value: function () {
-                return {
-                    value: 30,
-                    attrs: {
-                        displayName: 'Integer With Min Max',
-                        type: 'integer',
-                        min: 20,
-                        max: 50,
-                    },
-                };
-            },
-        },
-
-        enum: {
-            value: function () {
-                return {
-                    value: 'green',
-                    attrs: {
-                        displayName: 'Enum',
-                        type: 'enum',
-                        enumList: [
-                            { value: 'green', name: 'Green' },
-                            { value: 'blue', name: 'Blue' },
-                            { value: 'yellow', name: 'Yellow' },
-                            { value: 'red', name: 'Red' },
-                        ],
-                    },
-                };
-            },
-        },
-
-        vec2: {
-            value: function () {
-                return {
-                    value: new Fire.Vec2(10,20),
-                    attrs: {
-                        displayName: 'Fire.Vec2',
-                        type: 'Fire.Vec2',
-                    },
-                };
-            },
-        },
-
-        color: {
-            value: function () {
-                return {
-                    value: new Fire.Color( 1, 1, 1, 0.5 ),
-                    attrs: {
-                        displayName: 'Fire.Color',
-                        type: 'Fire.Color',
-                    },
-                };
-            },
-        },
-    },
-
-    ready: function () {
-    },
-});
-
-</script>
