@@ -1,5 +1,4 @@
-Editor.registerWidget( 'editor-custom-prop', {
-    is: 'editor-custom-prop',
+Editor.registerElement({
 
     behaviors: [EditorUI.focusable],
 

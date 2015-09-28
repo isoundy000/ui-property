@@ -1,5 +1,4 @@
-Editor.registerWidget( 'editor-null-field', {
-    is: 'editor-null-field',
+Editor.registerElement({
 
     properties: {
         label: {

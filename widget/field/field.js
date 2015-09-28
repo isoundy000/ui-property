@@ -1,5 +1,4 @@
-Editor.registerWidget( 'editor-field', {
-    is: 'editor-field',
+Editor.registerElement({
 
     properties: {
         path: {

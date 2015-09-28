@@ -1,5 +1,4 @@
-Editor.registerWidget( 'editor-array-prop', {
-    is: 'editor-array-prop',
+Editor.registerElement({
 
     behaviors: [EditorUI.focusable],
 

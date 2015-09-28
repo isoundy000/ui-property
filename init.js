@@ -1,8 +1,7 @@
 (function () {
     var type2widget = {
         'null-or-undefined': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-null-field'];
-            var el = new ctor();
+            var el = document.createElement('editor-null-field');
 
             el.path = info.path;
             el.type = info.attrs.type;
@@ -14,8 +13,7 @@
         },
 
         'error': function ( text ) {
-            var ctor = Editor.widgets['editor-label'];
-            var el = new ctor();
+            var el = document.createElement('editor-label');
             el.classList.add('red');
             Polymer.dom(el).innerHTML = 'Error: ' + text;
 
@@ -28,8 +26,7 @@
         },
 
         'Boolean': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-checkbox'];
-            var el = new ctor();
+            var el = document.createElement('editor-checkbox');
 
             el.checked = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'checked' );
@@ -38,8 +35,7 @@
         },
 
         'Integer': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-unit-input'];
-            var el = new ctor();
+            var el = document.createElement('editor-unit-input');
 
             el.min = info.attrs.min;
             el.max = info.attrs.max;
@@ -52,8 +48,7 @@
         'Float': function ( fieldEL, info ) {
             var ctor, el;
             if ( info.attrs.min !== undefined && info.attrs.max !== undefined ) {
-                ctor = Editor.widgets['editor-slider'];
-                el = new ctor();
+                el = document.createElement('editor-slider');
 
                 el.setAttribute('input','');
                 el.min = info.attrs.min;
@@ -63,8 +58,7 @@
                 EditorUI.bind( fieldEL, 'value', el, 'value' );
             }
             else {
-                ctor = Editor.widgets['editor-unit-input'];
-                el = new ctor();
+                el = document.createElement('editor-unit-input');
 
                 el.min = info.attrs.min;
                 el.max = info.attrs.max;
@@ -75,8 +69,7 @@
         },
 
         'Number': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-unit-input'];
-            var el = new ctor();
+            var el = document.createElement('editor-unit-input');
 
             el.min = info.attrs.min;
             el.max = info.attrs.max;
@@ -87,8 +80,7 @@
         },
 
         'String': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-input'];
-            var el = new ctor();
+            var el = document.createElement('editor-input');
 
             el.inputValue = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
@@ -97,8 +89,7 @@
         },
 
         'Enum': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['editor-select'];
-            var el = new ctor();
+            var el = document.createElement('editor-select');
 
             // attrs.enumList
             info.attrs.enumList.forEach( function ( item ) {
@@ -131,8 +122,7 @@
         },
 
         'Fire.Vec2': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['fire-vec2'];
-            var el = new ctor();
+            var el = document.createElement('fire-vec2');
 
             el.value = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
@@ -141,8 +131,7 @@
         },
 
         'Fire.Color': function ( fieldEL, info ) {
-            var ctor = Editor.widgets['fire-color'];
-            var el = new ctor();
+            var el = document.createElement('fire-color');
 
             el.value = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
@@ -185,8 +174,7 @@
     }
 
     Editor.bindNode = function ( fieldEL, value, attrs, type ) {
-        var ctor = Editor.widgets['fire-node'];
-        var el = new ctor();
+        var el = document.createElement('fire-node');
 
         el.type = type;
         el.value = value ? value.uuid : '';
@@ -196,8 +184,7 @@
     };
 
     Editor.bindAsset = function ( fieldEL, value, attrs, type ) {
-        var ctor = Editor.widgets['fire-asset'];
-        var el = new ctor();
+        var el = document.createElement('fire-asset');
 
         el.type = type;
         el.value = value ? value.uuid : '';

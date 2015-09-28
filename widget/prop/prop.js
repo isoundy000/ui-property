@@ -1,5 +1,4 @@
-Editor.registerWidget( 'editor-prop', {
-    is: 'editor-prop',
+Editor.registerElement({
 
     properties: {
         prop: {
