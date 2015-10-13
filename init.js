@@ -121,7 +121,7 @@
             return el;
         },
 
-        'Fire.Vec2': function ( fieldEL, info ) {
+        'cc.Vec2': function ( fieldEL, info ) {
             var el = document.createElement('fire-vec2');
 
             el.value = info.value;
@@ -130,7 +130,7 @@
             return el;
         },
 
-        'Fire.Color': function ( fieldEL, info ) {
+        'cc.Color': function ( fieldEL, info ) {
             var el = document.createElement('fire-color');
 
             el.value = info.value;
@@ -139,32 +139,32 @@
             return el;
         },
 
-        'Fire.RawAsset': function ( fieldEL, info ) {
+        'cc.RawAsset': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'raw-asset' );
         },
 
-        'Fire.Asset': function ( fieldEL, info ) {
+        'cc.Asset': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'asset' );
         },
 
-        'Fire.Texture': function ( fieldEL, info ) {
+        'cc.TextureAsset': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'texture' );
         },
 
-        'Fire.BitmapFont': function ( fieldEL, info ) {
+        'cc.BitmapFont': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'bitmap-font' );
         },
 
-        'Fire.TTFFont': function ( fieldEL, info ) {
+        'cc.TTFFont': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'ttf-font' );
         },
 
-        'Fire.AudioClip': function ( fieldEL, info ) {
+        'cc.AudioClip': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'audio-clip' );
         },
 
-        'Runtime.NodeWrapper': function ( fieldEL, info ) {
-            return Editor.bindNode( fieldEL, info.value, info.attrs, 'Runtime.NodeWrapper' );
+        'cc.NodeWrapper': function ( fieldEL, info ) {
+            return Editor.bindNode( fieldEL, info.value, info.attrs, 'cc.NodeWrapper' );
         },
 
     };
