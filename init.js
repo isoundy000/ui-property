@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     var type2widget = {
         'null-or-undefined': function ( fieldEL, info ) {
             var el = document.createElement('editor-null-field');
@@ -46,7 +48,7 @@
         },
 
         'Float': function ( fieldEL, info ) {
-            var ctor, el;
+            var el;
             if ( info.attrs.min !== undefined && info.attrs.max !== undefined ) {
                 el = document.createElement('editor-slider');
 
