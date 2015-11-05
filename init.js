@@ -149,7 +149,7 @@
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'asset' );
         },
 
-        'cc.TextureAsset': function ( fieldEL, info ) {
+        'cc.Texture2D': function ( fieldEL, info ) {
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'texture' );
         },
 

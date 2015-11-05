@@ -17,7 +17,7 @@ module.exports = {
             'cc.Color',
             'cc.RawAsset',
             'cc.Asset',
-            'cc.TextureAsset',
+            'cc.Texture2D',
             'cc.BitmapFont',
             'cc.TTFFont',
             'cc.AudioClip',
