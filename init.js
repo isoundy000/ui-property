@@ -132,6 +132,15 @@
             return el;
         },
 
+        'cc.Size': function ( fieldEL, info ) {
+            var el = document.createElement('fire-size');
+
+            el.value = info.value;
+            EditorUI.bind( fieldEL, 'value', el, 'value' );
+
+            return el;
+        },
+
         'cc.Color': function ( fieldEL, info ) {
             var el = document.createElement('fire-color');
 
