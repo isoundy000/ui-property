@@ -135,6 +135,7 @@
         'cc.Color': function ( fieldEL, info ) {
             var el = document.createElement('fire-color');
 
+            el.set('noAlpha', true);
             el.value = info.value;
             EditorUI.bind( fieldEL, 'value', el, 'value' );
 
