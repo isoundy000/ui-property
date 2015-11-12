@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
 
     properties: {
@@ -109,6 +111,8 @@ Editor.registerElement({
             }
         }
 
+        let propCreator;
+
         // try to get propCreator
         if ( !propEL ) {
             propCreator = Editor.properties[type];
@@ -158,19 +162,45 @@ Editor.registerElement({
         }
     },
 
-    _attrsChanged: function ( newValue, oldValue ) {
+    _attrsChanged: function () {
         this.rebuild();
     },
 
-    _typeChanged: function ( newValue, oldValue ) {
+    _typeChanged: function () {
         this.rebuild();
     },
 
-    _disabledChanged: function ( newValue, oldValue ) {
+    _disabledChanged: function ( newValue ) {
         var thisDOM = Polymer.dom(this);
         if ( thisDOM.firstChild ) {
             thisDOM.firstChild.disabled = newValue;
         }
     },
+
+    // TODO
+    // behaviors: [
+    //   Polymer.Templatizer
+    // ],
+
+    // _forwardParentProp: function(prop, value) {
+    //     if (this._instance) {
+    //         this._instance[prop] = value;
+    //     }
+    // },
+
+    // _forwardParentPath: function(path, value) {
+    //     if (this._instance) {
+    //         this._instance.notifyPath(path, value, true);
+    //     }
+    // },
+
+    // _forwardInstanceProp: function(inst, prop, value) {
+    //     this[prop] = value;
+    // },
+
+    // _forwardInstancePath: function(inst, path, value) {
+    //     this.notifyPath(path, value);
+    // },
+    // TODO
 
 });

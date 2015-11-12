@@ -79,6 +79,15 @@
             EditorUI.bind( fieldEL, 'value', el, 'input-value' );
 
             return el;
+
+            // TODO
+            // var inst = EditorUI.templatize(
+            //     fieldEL,
+            //     '<editor-unit-input min="[[attrs.min]]" max="[[attrs.max]]" inputValue="{{value}}"></editor-unit-input>',
+            //     info
+            // );
+            // fieldEL._instance = inst;
+            // return inst.root;
         },
 
         'String': function ( fieldEL, info ) {
