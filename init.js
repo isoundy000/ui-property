@@ -185,6 +185,10 @@
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'audio-clip' );
         },
 
+        'cc.AnimationClip': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'animation-clip' );
+        },
+
         'cc.NodeWrapper': function ( fieldEL, info ) {
             return Editor.bindNode( fieldEL, info.value, info.attrs, 'cc.NodeWrapper' );
         },
