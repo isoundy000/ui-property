@@ -189,8 +189,12 @@
             return Editor.bindAsset( fieldEL, info.value, info.attrs, 'animation-clip' );
         },
 
-        'cc.NodeWrapper': function ( fieldEL, info ) {
-            return Editor.bindNode( fieldEL, info.value, info.attrs, 'cc.NodeWrapper' );
+        'cc.Script': function ( fieldEL, info ) {
+            return Editor.bindAsset( fieldEL, info.value, info.attrs, 'script' );
+        },
+
+        'cc.Node': function ( fieldEL, info ) {
+            return Editor.bindNode( fieldEL, info.value, info.attrs, 'node' );
         },
 
     };
