@@ -109,8 +109,9 @@ Editor.registerElement({
             event.stopPropagation();
 
             var el = EditorUI.getFirstFocusableChild( this.$.field );
-            if ( el )
+            if ( el ) {
                 el.focus();
+            }
         }
     },
 });
