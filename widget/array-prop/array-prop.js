@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
 
     behaviors: [EditorUI.focusable],
@@ -8,7 +10,7 @@ Editor.registerElement({
 
     properties: {
         prop: {
-            value: function () {
+            value () {
                 return {
                     path: '',
                     type: '',
@@ -18,6 +20,7 @@ Editor.registerElement({
                 };
             },
             notify: true,
+            observer: '_propChanged',
         },
 
         folded: {
@@ -26,11 +29,11 @@ Editor.registerElement({
         },
     },
 
-    ready: function () {
+    ready () {
         this._initFocusable(this.$.focus);
     },
 
-    _nameText: function ( name, attrs ) {
+    _nameText ( name, attrs ) {
         if ( attrs && attrs.displayName ) {
             return attrs.displayName;
         }
@@ -41,7 +44,7 @@ Editor.registerElement({
         return '(Anonymous)';
     },
 
-    _nameClass: function ( name, attrs ) {
+    _nameClass ( name, attrs ) {
         if ( attrs && attrs.displayName ) {
             return 'name flex-1';
         }
@@ -52,67 +55,70 @@ Editor.registerElement({
         return 'name anonymous flex-1';
     },
 
-    _onFocusIn: function ( event ) {
+    _onFocusIn () {
         this._setFocused(true);
         this.$.field.editing = true;
     },
 
-    _onFocusOut: function ( event ) {
+    _onFocusOut () {
         this._setFocused(false);
         this.$.field.editing = false;
     },
 
-    _onMouseDown: function ( event ) {
+    _onMouseDown ( event ) {
         event.preventDefault();
         event.stopPropagation();
 
-        var el = EditorUI.getFirstFocusableChild( this.$.field );
-        if ( el )
+        let el = EditorUI.getFirstFocusableChild( this.$.field );
+        if ( el ) {
             el.focus();
+        }
     },
 
-    _onFieldMouseDown: function ( event ) {
+    _onFieldMouseDown ( event ) {
         event.stopPropagation();
         // don't do any propagation if we mouse down on field
     },
 
-    _onKeyDown: function (event) {
+    _onKeyDown (event) {
         // enter
         if (event.keyCode === 13) {
             event.preventDefault();
             event.stopPropagation();
 
-            var el = EditorUI.getFirstFocusableChild( this.$.field );
-            if ( el )
+            let el = EditorUI.getFirstFocusableChild( this.$.field );
+            if ( el ) {
                 el.focus();
+            }
         }
     },
 
-    _onDisabledChanged: function ( event ) {
-        var children = Polymer.dom(this.$.field).children;
-        for ( var i = 0; i < children.length; ++i ) {
-            var childEL = children[i];
+    _onDisabledChanged ( event ) {
+        let children = Polymer.dom(this.$.field).children;
+        for ( let i = 0; i < children.length; ++i ) {
+            let childEL = children[i];
             if ( childEL.disabled !== undefined ) {
                 childEL.disabled = event.detail.value;
             }
         }
     },
 
-    _onFoldMouseDown: function ( event ) {
+    _onFoldMouseDown ( event ) {
         event.stopPropagation();
         event.preventDefault();
     },
 
-    _onFoldClick: function ( event ) {
+    _onFoldClick ( event ) {
         event.stopPropagation();
 
-        if ( event.which !== 1 )
+        if ( event.which !== 1 ) {
             return;
+        }
 
         this.folded = !this.folded;
     },
 
-    _foldClass: function ( folded ) {
+    _foldClass ( folded ) {
         if ( folded ) {
             return 'fa fa-caret-right fold flex-none';
         }
@@ -120,7 +126,18 @@ Editor.registerElement({
         return 'fa fa-caret-down fold flex-none';
     },
 
-    _onArrayLengthChanged: function ( event ) {
+    // auto folded array
+    _propChanged ( newValue ) {
+        if ( newValue.value.length >= 10 ) {
+            this.set('folded', true);
+        } else {
+            this.set('folded', false);
+        }
+    },
+
+    _onArrayLengthChanged ( event ) {
+        let originalLength = this.prop.value.length;
         this.notifyPath('prop.value.length', event.detail.value );
+        this.prop.value.length = originalLength;
     },
 });
