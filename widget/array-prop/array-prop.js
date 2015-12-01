@@ -136,8 +136,9 @@ Editor.registerElement({
     },
 
     _onArrayLengthChanged ( event ) {
-        let originalLength = this.prop.value.length;
-        this.notifyPath('prop.value.length', event.detail.value );
-        this.prop.value.length = originalLength;
+        this.fire('target-changed', {
+            path: this.prop.path + '.value.length',
+            arraySize: event.detail.value,
+        });
     },
 });
