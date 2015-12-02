@@ -2,7 +2,10 @@
     <link rel="import" type="css" href="object-prop.css">
 
     <template>
-        <div id="mainProp" class="layout horizontal center-center">
+        <div id="mainProp"
+            class="layout horizontal center-center"
+            title$="{{prop.attrs.tooltip}}"
+            >
             <i id="foldIcon"
                 class$="[[_foldClass(folded)]]"
                 on-mousedown="_onFoldMouseDown"
