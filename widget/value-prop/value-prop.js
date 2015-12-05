@@ -1,3 +1,5 @@
+'use strict';
+
 Editor.registerElement({
 
     behaviors: [EditorUI.focusable],
@@ -85,9 +87,13 @@ Editor.registerElement({
             var max = Number.POSITIVE_INFINITY;
             if ( typeof this.prop.attrs.max === 'number' ) max = this.prop.attrs.max;
 
-            EditorUI.startDrag('ew-resize', event,function (event, dx, dy, offsetx, offsety) {
+            EditorUI.startDrag('ew-resize', event, (event, dx, dy, offsetx, offsety) => {
                 this.set('prop.value', Math.clamp(lastValue + offsetx, min, max));
-            }.bind(this),null);
+            }, () => {
+                this.async(() => {
+                    this.fire('end-editing');
+                },1);
+            });
         }
     },
 
@@ -103,8 +109,9 @@ Editor.registerElement({
             event.stopPropagation();
 
             var el = EditorUI.getFirstFocusableChild( this.$.field );
-            if ( el )
+            if ( el ) {
                 el.focus();
+            }
         }
     },
 });
