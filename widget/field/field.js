@@ -68,8 +68,9 @@ Editor.registerElement({
 
         // NOTE: never rebuild when type is Object or Array, this is because it will
         //       go to the object-prop and array-prop instead
-        if ( this.type === 'Object' || this.type === 'Array' )
+        if ( this.type === 'Object' || this.type === 'Array' ) {
             return;
+        }
 
         var thisDOM = Polymer.dom(this);
         var type, propEL;
@@ -78,11 +79,19 @@ Editor.registerElement({
             thisDOM.removeChild( thisDOM.firstChild );
         }
 
-        if ( this.attrs === undefined || this.type === undefined )
+        if ( this.attrs === undefined || this.type === undefined ) {
             return;
+        }
 
         if ( this.value === null || this.value === undefined ) {
             type = 'null-or-undefined';
+        }
+
+        if (
+            this.attrs.extends &&
+            this.attrs.extends.indexOf('cc.Component') !== -1
+        ) {
+            type = 'cc.Component';
         }
 
         //
