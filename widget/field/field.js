@@ -2,214 +2,236 @@
 
 Editor.registerElement({
 
-    properties: {
-        path: {
-            type: String,
-            value: '',
-        },
-
-        type: {
-            type: String,
-            value: '',
-            observer: '_typeChanged',
-        },
-
-        attrs: {
-            type: Object,
-            value: function () { return {}; },
-            observer: '_attrsChanged',
-        },
-
-        value: {
-            value: null,
-            notify: true,
-            observer: '_valueChanged',
-        },
-
-        slidable: {
-            type: Boolean,
-            value: false,
-            notify: true,
-        },
-
-        disabled: {
-            type: Boolean,
-            value: false,
-            notify: true,
-            reflectToAttribute: true,
-            observer: '_disabledChanged',
-        },
-
-        editing: {
-            value: null,
-            notify: true,
-            reflectToAttribute: true,
-        },
+  properties: {
+    path: {
+      type: String,
+      value: '',
     },
 
-    factoryImpl: function ( value, attrs ) {
-        this.value = value;
-        this.attrs = attrs;
+    type: {
+      type: String,
+      value: '',
+      observer: '_typeChanged',
     },
 
-    ready: function () {
+    attrs: {
+      type: Object,
+      value () { return {}; },
+      observer: '_attrsChanged',
+    },
+
+    value: {
+      value: null,
+      notify: true,
+      observer: '_valueChanged',
+    },
+
+    slidable: {
+      type: Boolean,
+      value: false,
+      notify: true,
+    },
+
+    disabled: {
+      type: Boolean,
+      value: false,
+      notify: true,
+      reflectToAttribute: true,
+      observer: '_disabledChanged',
+    },
+
+    editing: {
+      value: null,
+      notify: true,
+      reflectToAttribute: true,
+    },
+  },
+
+  factoryImpl ( value, attrs ) {
+    this.value = value;
+    this.attrs = attrs;
+  },
+
+  ready () {
+    this.rebuild();
+  },
+
+  rebuild () {
+    this.debounce ('rebuild', () => {
+      this._rebuild();
+    }, 50);
+  },
+
+  _isExpectedType ( type ) {
+    let attrsType = this.attrs.type;
+
+    // if attrs.type is undefined, it means the type is dynamic changed ( which happend in getter property )
+    if ( !attrsType ) {
+      return true;
+    }
+
+    if ( type === attrsType ) {
+      return true;
+    }
+
+    if ( this.attrs.extends && this.attrs.extends.indexOf(type) !== -1 ) {
+      return true;
+    }
+
+    if ( type === 'Number' && (attrsType === 'Enum' || attrsType === 'Float' || attrsType === 'Integer') ) {
+      return true;
+    }
+
+    return false;
+  },
+
+  _rebuild () {
+    // if ( this.editing )
+    //   return;
+
+    // NOTE: never rebuild when type is Object or Array, this is because it will
+    //     go to the object-prop and array-prop instead
+    if ( this.type === 'Object' || this.type === 'Array' ) {
+      return;
+    }
+
+    let thisDOM = Polymer.dom(this);
+    let type, propEL;
+
+    if ( thisDOM.firstChild ) {
+      thisDOM.removeChild( thisDOM.firstChild );
+    }
+
+    if ( this.attrs === undefined || this.type === undefined ) {
+      return;
+    }
+
+    //
+    if ( this.value === null || this.value === undefined ) {
+      type = 'null-or-undefined';
+    }
+
+    if (
+      this.attrs.extends &&
+      this.attrs.extends.indexOf('cc.Component') !== -1
+    ) {
+      type = 'cc.Component';
+    }
+
+    if ( !type ) {
+      if ( this.attrs.type ) {
+        type = this.attrs.type;
+      } else if ( this.type ) {
+        type = this.type;
+      } else {
+        type = typeof this.value;
+        type = type.charAt(0).toUpperCase() + type.slice(1);
+      }
+    }
+
+    // check if type error
+    if ( this.value !== null && this.value !== undefined ) {
+      let curType = this.type;
+      if ( !curType ) {
+        curType = typeof this.value;
+        curType = curType.charAt(0).toUpperCase() + curType.slice(1);
+      }
+      if ( !this._isExpectedType(curType) ) {
+        Editor.error( `Failed to create field ${curType}. type not the same ${curType}:${this.attrs.type}` );
+        propEL = Editor.properties.error( 'Error: type not the same', true, this.path, this.attrs.type );
+      }
+    }
+
+    let propCreator;
+
+    // try to get propCreator
+    if ( !propEL ) {
+      propCreator = Editor.properties[type];
+      if ( !propCreator ) {
+        Editor.error( `Failed to create field ${type}.` );
+        propEL = Editor.properties.error( `Error: type '${type}' not found` );
+      }
+    }
+
+    // try to create propEL
+    if ( !propEL ) {
+      try {
+        propEL = propCreator( this, {
+          value: this.value,
+          attrs: this.attrs,
+          type: type,
+          path: this.path,
+        });
+        propEL.readonly = this.attrs.readonly;
+        propEL.disabled = this.disabled;
+      }
+      catch ( error ) {
+        Editor.error( `Failed to create field ${type}. Message: ${error.stack}` );
+        propEL = Editor.properties.error( `Error: type '${type}' create failed` );
+      }
+    }
+
+    if ( type === 'Number' || type === 'Float' || type === 'Integer' ) {
+      this.set( 'slidable', true );
+    }
+
+    //
+    thisDOM.appendChild(propEL);
+  },
+
+  _valueChanged ( newValue, oldValue ) {
+    if ( oldValue === null || oldValue === undefined ) {
+      if ( newValue !== null && newValue !== undefined ) {
         this.rebuild();
-    },
+        return;
+      }
+    }
 
-    rebuild: function () {
-        this.debounce ('rebuild', function () {
-            this._rebuild();
-        }, 50);
-    },
+    if ( typeof newValue !== typeof oldValue ) {
+      this.rebuild();
+      return;
+    }
+  },
 
-    _rebuild: function () {
-        // if ( this.editing )
-        //     return;
+  _attrsChanged () {
+    this.rebuild();
+  },
 
-        // NOTE: never rebuild when type is Object or Array, this is because it will
-        //       go to the object-prop and array-prop instead
-        if ( this.type === 'Object' || this.type === 'Array' ) {
-            return;
-        }
+  _typeChanged () {
+    this.rebuild();
+  },
 
-        var thisDOM = Polymer.dom(this);
-        var type, propEL;
+  _disabledChanged ( newValue ) {
+    let thisDOM = Polymer.dom(this);
+    if ( thisDOM.firstChild ) {
+      thisDOM.firstChild.disabled = newValue;
+    }
+  },
 
-        if ( thisDOM.firstChild ) {
-            thisDOM.removeChild( thisDOM.firstChild );
-        }
+  // TODO
+  // behaviors: [
+  //   Polymer.Templatizer
+  // ],
 
-        if ( this.attrs === undefined || this.type === undefined ) {
-            return;
-        }
+  // _forwardParentProp (prop, value) {
+  //   if (this._instance) {
+  //     this._instance[prop] = value;
+  //   }
+  // },
 
-        if ( this.value === null || this.value === undefined ) {
-            type = 'null-or-undefined';
-        }
+  // _forwardParentPath (path, value) {
+  //   if (this._instance) {
+  //     this._instance.notifyPath(path, value, true);
+  //   }
+  // },
 
-        if (
-            this.attrs.extends &&
-            this.attrs.extends.indexOf('cc.Component') !== -1
-        ) {
-            type = 'cc.Component';
-        }
+  // _forwardInstanceProp (inst, prop, value) {
+  //   this[prop] = value;
+  // },
 
-        //
-        if ( !type ) {
-            if ( this.attrs.type ) {
-                type = this.attrs.type;
-            }
-            else if ( this.type ) {
-                type = this.type;
-            }
-            else {
-                type = typeof this.value;
-                type = type.charAt(0).toUpperCase() + type.slice(1);
-            }
-
-            // check if type error
-            if ( this.type && this.attrs.type ) {
-                if ( this.type !== this.attrs.type ) {
-                    if (this.attrs.extends &&
-                        this.attrs.extends.indexOf(type) === -1)
-                        {
-                            Editor.error( 'Failed to create field %s. Message: type not the same %s:%s', type, this.type, this.attrs.type );
-                            propEL = new Editor.properties.error('value and attr has different type');
-                        }
-                }
-            }
-        }
-
-        let propCreator;
-
-        // try to get propCreator
-        if ( !propEL ) {
-            propCreator = Editor.properties[type];
-            if ( !propCreator ) {
-                Editor.error( 'Failed to create field %s.', type );
-                propEL = new Editor.properties.error('Type not found: ' + type);
-            }
-        }
-
-        // try to create propEL
-        if ( !propEL ) {
-            try {
-                propEL = propCreator( this, {
-                    value: this.value,
-                    attrs: this.attrs,
-                    type: this.type,
-                    path: this.path,
-                });
-                propEL.readonly = this.attrs.readonly;
-                propEL.disabled = this.disabled;
-            }
-            catch ( error ) {
-                Editor.error( 'Failed to create field %s. Message: %s', type, error.stack );
-                propEL = new Editor.properties.error( 'Element create failed for type: ' + type );
-            }
-        }
-
-        if ( type === 'Number' || type === 'Float' || type === 'Integer' ) {
-            this.set( 'slidable', true );
-        }
-
-        //
-        thisDOM.appendChild(propEL);
-    },
-
-    _valueChanged: function ( newValue, oldValue ) {
-        if ( oldValue === null || oldValue === undefined ) {
-            if ( newValue !== null && newValue !== undefined ) {
-                this.rebuild();
-                return;
-            }
-        }
-
-        if ( typeof newValue !== typeof oldValue ) {
-            this.rebuild();
-            return;
-        }
-    },
-
-    _attrsChanged: function () {
-        this.rebuild();
-    },
-
-    _typeChanged: function () {
-        this.rebuild();
-    },
-
-    _disabledChanged: function ( newValue ) {
-        var thisDOM = Polymer.dom(this);
-        if ( thisDOM.firstChild ) {
-            thisDOM.firstChild.disabled = newValue;
-        }
-    },
-
-    // TODO
-    // behaviors: [
-    //   Polymer.Templatizer
-    // ],
-
-    // _forwardParentProp: function(prop, value) {
-    //     if (this._instance) {
-    //         this._instance[prop] = value;
-    //     }
-    // },
-
-    // _forwardParentPath: function(path, value) {
-    //     if (this._instance) {
-    //         this._instance.notifyPath(path, value, true);
-    //     }
-    // },
-
-    // _forwardInstanceProp: function(inst, prop, value) {
-    //     this[prop] = value;
-    // },
-
-    // _forwardInstancePath: function(inst, path, value) {
-    //     this.notifyPath(path, value);
-    // },
-    // TODO
+  // _forwardInstancePath (inst, path, value) {
+  //   this.notifyPath(path, value);
+  // },
+  // TODO
 
 });

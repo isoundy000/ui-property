@@ -5,6 +5,8 @@
     box-sizing: border-box;
     margin-bottom: 5px;
     min-height: 24px;
+
+    cursor: default;
 }
 
 .group {

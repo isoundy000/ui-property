@@ -9,6 +9,8 @@
     min-height: 24px;
 
     margin-bottom: 5px;
+
+    cursor: default;
 }
 
 .name {

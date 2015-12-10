@@ -2,7 +2,17 @@
 
 Editor.registerElement({
   properties: {
-    label: {
+    message: {
+      type: String,
+      value: '',
+    },
+
+    resetable: {
+      type: Boolean,
+      value: false,
+    },
+
+    path: {
       type: String,
       value: '',
     },
@@ -11,16 +21,11 @@ Editor.registerElement({
       type: String,
       value: '',
     },
-
-    path: {
-      type: String,
-      value: '',
-    },
   },
 
-  _onCreateClick ( event ) {
+  _onResetClick ( event ) {
     event.stopPropagation();
-    this.fire('new-prop', {
+    this.fire('reset-prop', {
       path: this.path,
       type: this.type,
     });
