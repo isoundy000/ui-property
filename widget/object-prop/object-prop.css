@@ -1,90 +1,94 @@
 :host {
-    display: block;
+  display: block;
 
-    font-size: 12px;
-    box-sizing: border-box;
-    margin-bottom: 5px;
-    min-height: 24px;
+  font-size: 12px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  min-height: 24px;
+
+  cursor: default;
 }
 
 .group {
-    display: flex;
-    margin-right: 10px;
+  margin-right: 10px;
+  margin-left: 5px;
+  min-height: 22px;
+
+  cursor: pointer;
 }
 
 .group[readonly] .name {
-    color: #888888;
+  color: #888888;
 }
 
 .group[readonly] .label {
-    display: block;
+  display: block;
 }
 
 .name {
-    min-width: 30px;
+  min-width: 30px;
 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
-    color: #aaa;
+  color: #aaa;
 }
 
 .name:hover {
-    color: #f90;
+  color: #f90;
 }
 
 .name.anonymous {
-    color: #888;
+  color: #888;
 }
 
 .label {
-    display: none;
+  display: none;
 
-    font-size: 9px;
-    font-weight: bold;
-    font-style: italic;
-    padding: .1em .5em;
-    min-width: 20px;
+  font-size: 9px;
+  font-weight: bold;
+  font-style: italic;
+  padding: .1em .5em;
+  min-width: 20px;
 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
-    border-radius: 1px;
-    border-color: #e8e8e8;
-    background: #2376e4;
-}
-
-:host[focused] .name {
-    color: #00a6ff;
-}
-
-:host[disabled] * {
-    pointer-events: none;
-}
-
-:host[disabled] .name {
-    color: #666;
+  border-radius: 1px;
+  border-color: #e8e8e8;
+  background: #2376e4;
 }
 
 .fold {
-    text-align: center;
-    width: 10px;
-    color: #aaa;
-    cursor: pointer;
+  text-align: center;
+  width: 10px;
+  color: #aaa;
+  cursor: pointer;
 }
 
 .fold:hover {
-    color: #fff;
-}
-
-#focus {
-    margin-left: 5px;
-    min-height: 22px;
+  color: #fff;
 }
 
 #subProps {
-    margin-top: 5px;
-    margin-left: 15px;
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+:host[focused] .name {
+  color: #00a6ff;
+}
+
+:host[focused] .fold {
+  color: #00a6ff;
+}
+
+:host[disabled] * {
+  pointer-events: none;
+}
+
+:host[disabled] .name {
+  color: #666;
 }

@@ -1,123 +1,105 @@
+'use strict';
+
 Editor.registerElement({
 
-    behaviors: [EditorUI.focusable],
+  behaviors: [EditorUI.focusable],
 
-    listeners: {
-        'disabled-changed': '_onDisabledChanged',
+  listeners: {
+    'disabled-changed': '_onDisabledChanged',
+  },
+
+  properties: {
+    prop: {
+      value () {
+        return {
+          path: '',
+          type: '',
+          name: '',
+          attrs: {},
+          value: null,
+        };
+      },
+      notify: true,
     },
 
-    properties: {
-        prop: {
-            value: function () {
-                return {
-                    path: '',
-                    type: '',
-                    name: '',
-                    attrs: {},
-                    value: null,
-                };
-            },
-            notify: true,
-        },
-
-        folded: {
-            type: Boolean,
-            value: true,
-        },
+    folded: {
+      type: Boolean,
+      value: true,
     },
+  },
 
-    ready: function () {
-        this._initFocusable(this.$.focus);
-    },
+  ready () {
+    this._initFocusable(this.$.focus);
+  },
 
-    _nameText: function ( name, attrs ) {
-        if ( attrs && attrs.displayName ) {
-            return attrs.displayName;
-        }
-        else if ( name ) {
-            return EditorUI.toHumanText(name);
-        }
+  _nameText ( name, attrs ) {
+    if ( attrs && attrs.displayName ) {
+      return attrs.displayName;
+    }
+    else if ( name ) {
+      return EditorUI.toHumanText(name);
+    }
 
-        return '(Anonymous)';
-    },
+    return '(Anonymous)';
+  },
 
-    _nameClass: function ( name, attrs ) {
-        if ( attrs && attrs.displayName ) {
-            return 'name flex-1';
-        }
-        else if ( name ) {
-            return 'name flex-1';
-        }
+  _nameClass ( name, attrs ) {
+    if ( attrs && attrs.displayName ) {
+      return 'name flex-1';
+    }
+    else if ( name ) {
+      return 'name flex-1';
+    }
 
-        return 'name anonymous flex-1';
-    },
+    return 'name anonymous flex-1';
+  },
 
-    _onFocusIn: function ( event ) {
-        this._setFocused(true);
-        // this.$.field.editing = true;
-    },
+  _onKeyDown (event) {
+    // press 'enter' and 'space'
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.folded = !this.folded;
+    }
+    // press left
+    else if (event.keyCode === 37) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.folded = true;
+    }
+    // press right
+    else if (event.keyCode === 39) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.folded = false;
+    }
+  },
 
-    _onFocusOut: function ( event ) {
-        this._setFocused(false);
-        // this.$.field.editing = false;
-    },
+  _onFoldClick ( event ) {
+    event.stopPropagation();
 
-    _onMouseDown: function ( event ) {
-        event.preventDefault();
-        event.stopPropagation();
+    if ( event.which !== 1 )
+      return;
 
-        // TODO
-        // var el = EditorUI.getFirstFocusableChild( this.$.field );
-        // if ( el )
-        //     el.focus();
-    },
+    this.folded = !this.folded;
+  },
 
-    _onFieldMouseDown: function ( event ) {
-        event.stopPropagation();
-        // don't do any propagation if we mouse down on field
-    },
+  _onDisabledChanged () {
+    // TODO
+    // var children = Polymer.dom(this.$.field).children;
+    // for ( var i = 0; i < children.length; ++i ) {
+    //   var childEL = children[i];
+    //   if ( childEL.disabled !== undefined ) {
+    //     childEL.disabled = event.detail.value;
+    //   }
+    // }
+  },
 
-    _onKeyDown: function (event) {
-        // enter
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            event.stopPropagation();
+  _foldClass ( folded ) {
+    if ( folded ) {
+      return 'fa fa-caret-right fold flex-none';
+    }
 
-            // var el = EditorUI.getFirstFocusableChild( this.$.field );
-            // if ( el )
-            //     el.focus();
-        }
-    },
-
-    _onDisabledChanged: function ( event ) {
-        // var children = Polymer.dom(this.$.field).children;
-        // for ( var i = 0; i < children.length; ++i ) {
-        //     var childEL = children[i];
-        //     if ( childEL.disabled !== undefined ) {
-        //         childEL.disabled = event.detail.value;
-        //     }
-        // }
-    },
-
-    _onFoldMouseDown: function ( event ) {
-        event.stopPropagation();
-        event.preventDefault();
-    },
-
-    _onFoldClick: function ( event ) {
-        event.stopPropagation();
-
-        if ( event.which !== 1 )
-            return;
-
-        this.folded = !this.folded;
-    },
-
-    _foldClass: function ( folded ) {
-        if ( folded ) {
-            return 'fa fa-caret-right fold flex-none';
-        }
-
-        return 'fa fa-caret-down fold flex-none';
-    },
+    return 'fa fa-caret-down fold flex-none';
+  },
 });
