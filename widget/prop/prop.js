@@ -1,51 +1,56 @@
+'use strict';
+
 Editor.registerElement({
-
-    properties: {
-        prop: {
-            value: function () {
-                return {
-                    path: '',
-                    type: '',
-                    name: '',
-                    attrs: {},
-                    value: null,
-                };
-            },
-            notify: true,
-        },
-
-        disabled: {
-            type: Boolean,
-            value: false,
-            notify: true,
-            reflectToAttribute: true,
-        },
+  properties: {
+    prop: {
+      value () {
+        return {
+          path: '',
+          type: '',
+          name: '',
+          attrs: {},
+          value: null,
+        };
+      },
+      notify: true,
     },
 
-    ready: function () {
+    disabled: {
+      type: Boolean,
+      value: false,
+      notify: true,
+      reflectToAttribute: true,
     },
+  },
 
-    _isValueProp: function ( type ) {
-        if ( type === 'Array' )
-            return false;
+  ready () {
+  },
 
-        if ( type === 'Object' )
-            return false;
+  _isValueProp ( type ) {
+    if ( type === 'Array' ) {
+      return false;
+    }
 
-        return true;
-    },
+    if ( type === 'Object' ) {
+      return false;
+    }
 
-    _isArrayProp: function ( type ) {
-        if ( type === 'Array' )
-            return true;
+    return true;
+  },
 
-        return false;
-    },
+  _isArrayProp ( type ) {
+    if ( type === 'Array' ) {
+      return true;
+    }
 
-    _isObjectProp: function ( type ) {
-        if ( type === 'Object' )
-            return true;
+    return false;
+  },
 
-        return false;
-    },
+  _isObjectProp ( type ) {
+    if ( type === 'Object' ) {
+      return true;
+    }
+
+    return false;
+  },
 });
