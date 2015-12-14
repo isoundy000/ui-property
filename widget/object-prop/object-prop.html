@@ -7,6 +7,7 @@
         on-blur="_onBlur"
         on-click="_onFoldClick"
         on-keydown="_onKeyDown"
+        title$="{{prop.attrs.tooltip}}"
       >
       <i id="foldIcon"
         class$="[[_foldClass(folded)]]"
