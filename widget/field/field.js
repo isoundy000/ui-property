@@ -96,7 +96,7 @@ Editor.registerElement({
     }
 
     let thisDOM = Polymer.dom(this);
-    let type, propEL;
+    let type;
 
     if ( thisDOM.firstChild ) {
       thisDOM.removeChild( thisDOM.firstChild );
@@ -109,6 +109,10 @@ Editor.registerElement({
     //
     if ( this.value === null || this.value === undefined ) {
       type = 'null-or-undefined';
+    }
+
+    if ( this.type === 'error-unknown' ) {
+      type = 'error-unknown';
     }
 
     if (
@@ -129,16 +133,25 @@ Editor.registerElement({
       }
     }
 
+    let propEL;
+
+    // unknown type
+    if ( type === 'error-unknown' ) {
+      propEL = Editor.properties.error('Unknown Type');
+    }
+
     // check if type error
-    if ( this.value !== null && this.value !== undefined ) {
-      let curType = this.type;
-      if ( !curType ) {
-        curType = typeof this.value;
-        curType = curType.charAt(0).toUpperCase() + curType.slice(1);
-      }
-      if ( !this._isExpectedType(curType) ) {
-        Editor.error( `Failed to create field ${curType}. type not the same ${curType}:${this.attrs.type}` );
-        propEL = Editor.properties.error( 'Error: type not the same', true, this.path, this.attrs.type );
+    if ( !propEL ) {
+      if ( this.value !== null && this.value !== undefined ) {
+        let curType = this.type;
+        if ( !curType ) {
+          curType = typeof this.value;
+          curType = curType.charAt(0).toUpperCase() + curType.slice(1);
+        }
+        if ( !this._isExpectedType(curType) ) {
+          Editor.error( `Failed to create field ${curType}. type not the same ${curType}:${this.attrs.type}` );
+          propEL = Editor.properties.error( 'Error: type not the same', true, this.path, this.attrs.type );
+        }
       }
     }
 
