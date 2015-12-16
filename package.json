@@ -8,8 +8,9 @@
   },
   "main": "main.js",
   "menus": {
-    "Developer/UI Preview/ui-property": {
-      "message": "ui-property:open"
+    "i18n:MAIN_MENU.developer.title/UI Preview/ui-property": {
+      "message": "ui-property:open",
+      "dev": true
     }
   },
   "widgets": {
