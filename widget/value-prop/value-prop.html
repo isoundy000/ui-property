@@ -1,29 +1,29 @@
 <link rel="import" href="../field/field.html">
 
 <dom-module id="editor-value-prop">
-    <link rel="import" type="css" href="value-prop.css">
+  <link rel="import" type="css" href="value-prop.css">
 
-    <template>
-        <div class="layout horizontal flex-1 group"
-            readonly$="{{prop.attrs.readonly}}"
-            title$="{{prop.attrs.tooltip}}"
-            >
-            <div class$="{{_nameClass(prop.name,prop.attrs)}}"
-                on-mousedown="_onMouseDown"
-                >{{_nameText(prop.name,prop.attrs)}}</div>
-            <div class="label">readonly</div>
-        </div>
-        <editor-field id="field" class="flex-2"
-            path="[[prop.path]]"
-            type="[[prop.type]]"
-            attrs="[[prop.attrs]]"
-            value="{{prop.value}}"
-            slidable="{{slidable}}"
-            disabled="[[disabled]]"
-            on-mousedown="_onFieldMouseDown"
-            >
-        </editor-field>
-    </template>
+  <template>
+    <div class="layout horizontal flex-1 group"
+      readonly$="{{prop.attrs.readonly}}"
+      title$="{{prop.attrs.tooltip}}"
+      >
+      <div class$="{{_nameClass(prop.name)}}"
+        on-mousedown="_onMouseDown"
+        >{{_nameText(prop.name)}}</div>
+      <div class="label">readonly</div>
+    </div>
+    <editor-field id="field" class="flex-2"
+      path="[[prop.path]]"
+      type="[[prop.type]]"
+      attrs="[[prop.attrs]]"
+      value="{{prop.value}}"
+      slidable="{{slidable}}"
+      disabled="[[disabled]]"
+      on-mousedown="_onFieldMouseDown"
+      >
+    </editor-field>
+  </template>
 
-    <script type="text/javascript" src="value-prop.js"></script>
+  <script type="text/javascript" src="value-prop.js"></script>
 </dom-module>

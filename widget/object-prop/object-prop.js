@@ -32,22 +32,16 @@ Editor.registerElement({
     this._initFocusable(this.$.focus);
   },
 
-  _nameText ( name, attrs ) {
-    if ( attrs && attrs.displayName ) {
-      return attrs.displayName;
-    }
-    else if ( name ) {
+  _nameText ( name ) {
+    if ( name ) {
       return EditorUI.toHumanText(name);
     }
 
     return '(Anonymous)';
   },
 
-  _nameClass ( name, attrs ) {
-    if ( attrs && attrs.displayName ) {
-      return 'name flex-1';
-    }
-    else if ( name ) {
+  _nameClass ( name ) {
+    if ( name ) {
       return 'name flex-1';
     }
 
