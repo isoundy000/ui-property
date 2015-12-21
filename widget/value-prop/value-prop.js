@@ -82,7 +82,7 @@ Editor.registerElement({
       if ( typeof this.prop.attrs.max === 'number' ) max = this.prop.attrs.max;
 
       EditorUI.startDrag('ew-resize', event, (event, dx, dy, offsetx, offsety) => {
-        this.set('prop.value', Math.clamp(lastValue + offsetx, min, max));
+        this.set('prop.value', Editor.Math.clamp(lastValue + offsetx, min, max));
       }, () => {
         this.async(() => {
           this.fire('end-editing');
